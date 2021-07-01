@@ -13,13 +13,26 @@ var KTProjectsAdd = function () {
 		// Initialize form wizard
 		_wizardObj = new KTWizard(_wizardEl, {
 			startStep: 1, // initial active step number
-			clickableSteps: false  // allow step clicking
+			clickableSteps: true  // allow step clicking
 		});
 
 		// Validation before going to next page
 		_wizardObj.on('change', function (wizard) {
 			if (wizard.getStep() > wizard.getNewStep()) {
 				return; // Skip if stepped back
+			}
+
+			if (wizard.getStep() != 4) {
+				$('.product-name').html($('input[name="name"]').val());
+				$('.product-description').html($('textarea[name="description"]').val());
+				$('.product-category').html($('select[name="category_id"] option:selected').text());
+				$('.product-reference').html($('input[name="reference"]').val());
+				$('.product-stock').html($('input[name="stock"]').val());
+				$('.product-stock-mini').html($('input[name="stock_mini"]').val());
+				var status = $('input[name="status"]').is(':checked') ? 'Oui' : 'Non';
+				$('.product-status').html(status);
+				var url = $('.image-input-wrapper').attr('style') != undefined && $('.image-input-wrapper').attr('style') != 'background-image: none;' ? $('.image-input-wrapper').attr('style') : $('#kt_image_5').attr('style');
+				$('.product-photo span').attr('style', url);
 			}
 
 			// Validate form before change wizard step
@@ -33,10 +46,10 @@ var KTProjectsAdd = function () {
 						KTUtil.scrollTop();
 					} else {
 						Swal.fire({
-							text: "Sorry, looks like there are some errors detected, please try again.",
+							text: "Attention ! Il semblerait que certains champs requis n'aient pas été renseignés.",
 							icon: "error",
 							buttonsStyling: false,
-							confirmButtonText: "Ok, got it!",
+							confirmButtonText: "C'est compris",
 							customClass: {
 								confirmButton: "btn font-weight-bold btn-light"
 							}
@@ -57,32 +70,7 @@ var KTProjectsAdd = function () {
 
 		// Submit event
 		_wizardObj.on('submit', function (wizard) {
-			Swal.fire({
-				text: "All is good! Please confirm the form submission.",
-				icon: "success",
-				showCancelButton: true,
-				buttonsStyling: false,
-				confirmButtonText: "Yes, submit!",
-				cancelButtonText: "No, cancel",
-				customClass: {
-					confirmButton: "btn font-weight-bold btn-primary",
-					cancelButton: "btn font-weight-bold btn-default"
-				}
-			}).then(function (result) {
-				if (result.value) {
-					_formEl.submit(); // Submit form
-				} else if (result.dismiss === 'cancel') {
-					Swal.fire({
-						text: "Your form has not been submitted!.",
-						icon: "error",
-						buttonsStyling: false,
-						confirmButtonText: "Ok, got it!",
-						customClass: {
-							confirmButton: "btn font-weight-bold btn-primary",
-						}
-					});
-				}
-			});
+			_formEl.submit();
 		});
 	}
 
@@ -93,55 +81,13 @@ var KTProjectsAdd = function () {
 			_formEl,
 			{
 				fields: {
-					projectname: {
+					name: {
 						validators: {
 							notEmpty: {
-								message: 'Project name is required'
+								message: 'Le nom du produit est requis'
 							}
 						}
 					},
-					projectowner: {
-						validators: {
-							notEmpty: {
-								message: 'Project owner is required'
-							}
-						}
-					},
-					customername: {
-						validators: {
-							notEmpty: {
-								message: 'Customer name is required'
-							}
-						}
-					},
-					phone: {
-						validators: {
-							notEmpty: {
-								message: 'Phone is required'
-							},
-							phone: {
-								country: 'US',
-								message: 'The value is not a valid US phone number. (e.g 5554443333)'
-							}
-						}
-					},
-					email: {
-						validators: {
-							notEmpty: {
-								message: 'Email is required'
-							},
-							emailAddress: {
-								message: 'The value is not a valid email address'
-							}
-						}
-					},
-					companywebsite: {
-						validators: {
-							notEmpty: {
-								message: 'Website URL is required'
-							}
-						}
-					}
 				},
 				plugins: {
 					trigger: new FormValidation.plugins.Trigger(),
@@ -160,28 +106,20 @@ var KTProjectsAdd = function () {
 			{
 				fields: {
 					// Step 2
-					communication: {
+					category_id: {
 						validators: {
-							choice: {
-								min: 1,
-								message: 'Please select at least 1 option'
+							notEmpty: {
+								message: 'Veuillez sélectionner la catégorie du produit'
 							}
 						}
 					},
-					language: {
+					reference: {
 						validators: {
 							notEmpty: {
-								message: 'Please select a language'
+								message: 'Une référence produit est requise'
 							}
 						}
 					},
-					timezone: {
-						validators: {
-							notEmpty: {
-								message: 'Please select a timezone'
-							}
-						}
-					}
 				},
 				plugins: {
 					trigger: new FormValidation.plugins.Trigger(),
@@ -199,38 +137,17 @@ var KTProjectsAdd = function () {
 			_formEl,
 			{
 				fields: {
-					address1: {
+					stock: {
 						validators: {
 							notEmpty: {
-								message: 'Address is required'
+								message: 'Veuillez saisir le stock actuel'
 							}
 						}
 					},
-					postcode: {
+					stock_mini: {
 						validators: {
 							notEmpty: {
-								message: 'Postcode is required'
-							}
-						}
-					},
-					city: {
-						validators: {
-							notEmpty: {
-								message: 'City is required'
-							}
-						}
-					},
-					state: {
-						validators: {
-							notEmpty: {
-								message: 'state is required'
-							}
-						}
-					},
-					country: {
-						validators: {
-							notEmpty: {
-								message: 'Country is required'
+								message: 'Veuillez définir une valeur pour l‘alerte de stock minimum'
 							}
 						}
 					},
@@ -253,8 +170,10 @@ var KTProjectsAdd = function () {
 			_wizardEl = KTUtil.getById('kt_projects_add');
 			_formEl = KTUtil.getById('kt_projects_add_form');
 
-			_initWizard();
-			_initValidation();
+			if ($('#kt_projects_add').length)
+				_initWizard();
+			if ($('#kt_projects_add_form').length)
+				_initValidation();
 		}
 	};
 }();

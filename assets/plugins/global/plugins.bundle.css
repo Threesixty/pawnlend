@@ -5378,10 +5378,6 @@ Build date: 2019-12-19 16:51:02
   right: 28px;
 }
 
-/*
- * The MIT License
- * Copyright (c) 2012 Matias Meno <m@tias.me>
- */
 @-webkit-keyframes passing-through {
   0% {
     opacity: 0;

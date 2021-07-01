@@ -1,5 +1,7 @@
 "use strict";
 
+var KTAppSettings = { "breakpoints": { "sm": 576, "md": 768, "lg": 992, "xl": 1200, "xxl": 1400 }, "colors": { "theme": { "base": { "white": "#ffffff", "primary": "#3699FF", "secondary": "#E5EAEE", "success": "#1BC5BD", "info": "#8950FC", "warning": "#FFA800", "danger": "#F64E60", "light": "#E4E6EF", "dark": "#181C32" }, "light": { "white": "#ffffff", "primary": "#E1F0FF", "secondary": "#EBEDF3", "success": "#C9F7F5", "info": "#EEE5FF", "warning": "#FFF4DE", "danger": "#FFE2E5", "light": "#F3F6F9", "dark": "#D6D6E0" }, "inverse": { "white": "#ffffff", "primary": "#ffffff", "secondary": "#3F4254", "success": "#ffffff", "info": "#ffffff", "warning": "#ffffff", "danger": "#ffffff", "light": "#464E5F", "dark": "#ffffff" } }, "gray": { "gray-100": "#F3F6F9", "gray-200": "#EBEDF3", "gray-300": "#E4E6EF", "gray-400": "#D1D3E0", "gray-500": "#B5B5C3", "gray-600": "#7E8299", "gray-700": "#5E6278", "gray-800": "#3F4254", "gray-900": "#181C32" } }, "font-family": "Poppins" };
+
 // Component Definition
 var KTApp = function() {
     /** @type {object} colors State colors **/
@@ -158,6 +160,304 @@ var KTApp = function() {
             // hide dropdown
             $detachedDropdownMenu.hide();
         });
+    }
+
+
+    var initQuickUserToggleTrigger = function() {
+        $('#kt_quick_user_toggle_trigger').on('click', function(){
+            $('#kt_quick_user_toggle').trigger('click');
+        });
+    };
+
+    var initSwalNotifications = function() {
+
+    	var notifications = [];
+        if ($('.notification').length) {
+        	$('.notification').each(function() {
+
+				notifications.push({
+	                text: $(this).data('msg'),
+	                icon: $(this).data('status'),
+	                buttonsStyling: false,
+	                confirmButtonText: "Ok",
+	                customClass: {
+						confirmButton: "btn font-weight-bold btn-light-primary"
+					}
+	            });
+	        });
+	    }
+	    swal.queue(notifications);
+
+    };
+
+    var initModalStock = function() {
+
+    	$('#modalIncStock, #modalDecStock').on('shown.bs.modal', function (relatedTarget) {
+
+		    $(relatedTarget.currentTarget).find('input[name="product_id"]').focus();
+
+		})  
+
+        $('.update-modal-inc').on('click', function() {
+            $('#modalIncStock').find('input[name="product_id"]').val($(this).closest('ul').data('id'));
+        }); 
+
+        $('.update-modal-dec').on('click', function() {
+            $('#modalDecStock').find('input[name="product_id"]').val($(this).closest('ul').data('id'));
+        }); 
+    };
+
+    var initShowHistory = function() {
+
+    	$('.kt_quick_panel_toggle').on('click', function() {
+
+            $('#kt_quick_panel_toggle').trigger('click');
+
+	        $.ajax({
+				url : $(this).closest('.history-parent').data('url'),
+				type: 'GET',
+				contentType: 'application/x-www-form-urlencoded;charset=utf8',
+				data : {
+					elementId: $(this).closest('.history-parent').data('id'),
+				},
+				success: function(res){
+
+					var histories = JSON.parse(res);
+
+					if (histories.length) {
+
+						$('#kt_quick_panel').find('.navi-item').each(function() {
+							if (!$(this).hasClass('d-none'))
+								$(this).remove();
+						});
+						for (var idx = 0; idx < histories.length; idx++) {
+
+							var currentHistory = histories[idx];
+
+							var style = 'primary',
+								icon = 'plus',
+								sign = '+';
+							if (currentHistory['operation'] == 'dec') {
+								style = 'warning',
+								icon = 'minus',
+								sign = '-';
+							}
+
+							var operation = currentHistory['operation'] == 'inc' ? 'Approvisionnement ' : 'Expédition ';
+							var title = '<span class="text-' + style + ' text-uppercase">' + operation + '</span><hr class="my-1">';
+							var count = 'Le ' + getDateFormat(currentHistory['created_at'] * 1000);
+							var subtitle = currentHistory['user'] != undefined ? '<small class="d-block">Par <strong>' + currentHistory['user']['firstname'] + ' ' + currentHistory['user']['lastname'] + '</strong></small>' : '<small class="d-block">Produit <strong>' + currentHistory['product']['name'] + '</strong></small>';
+
+							var clone = $('#kt_quick_panel').find('.navi-item.d-none').clone();
+							clone.find('.symbol-label span.text-center').addClass('text-' + style).html(sign + currentHistory['value']);
+							clone.find('.title').html(title);
+							clone.find('.count').html(count);
+							clone.find('.subtitle').html(subtitle);
+							clone.removeClass('d-none');
+							$('#kt_quick_panel .offcanvas-content .navi').append(clone);
+						}
+					}
+				},
+				error: function(){
+					alert('An error occured, please contact support.');
+				}
+	        });
+    	});
+
+    	function getDateFormat(date) {
+
+			var d = new Date(date),
+			        month = '' + (d.getMonth() + 1),
+			        day = '' + d.getDate(),
+			        year = d.getFullYear(),
+			        hour = '' + d.getHours(),
+			        min = '' + d.getMinutes();
+
+			if (month.length < 2)
+			    month = '0' + month;
+			if (day.length < 2)
+			    day = '0' + day;
+			if (hour.length < 2)
+			    hour = '0' + hour;
+			if (min.length < 2)
+			    min = '0' + min;
+
+			var date = new Date();
+			date.toLocaleDateString();
+
+			var date1 = [day, month, year].join('/');
+			var date2 = [hour, min].join(':')
+
+			return date1 + ' à ' + date2;
+		}
+    };
+
+    var initModalBarcode = function() {
+
+    	$('.show-barcode').on('click', function() {
+
+    		$('#modalBarcode').find('.modal-title').html($(this).closest('tr').find('.product-name a').text());
+    		$('#modalBarcode').find('.barcode-img').attr('src', $(this).data('img'));
+    		$('#modalBarcode').modal('show');
+    	});
+
+    	$('.print-barcode').on('click', function() {
+
+	        var printWindow = window.open('', 'Imprimer','height=400,width=600');
+	        var html = '<html><head><title>Imprimer</title></head><body>' + $(this).closest('.modal-content').find('.modal-title').text() + '<p><img src="' + $(this).closest('.modal-content').find('.barcode-img').attr('src') + '"></p></body></html>';
+	        printWindow.document.write(html);
+	        printWindow.document.close();
+			printWindow.focus();
+			printWindow.print();
+			printWindow.close();
+			return false;
+    	});
+
+    };
+
+    var initUserFormValidation = function() {
+
+    	if ($('#kt_user_form').length) {
+
+	        var validation;
+
+	        // Init form validation rules. For more info check the FormValidation plugin's official documentation:https://formvalidation.io/
+	        validation = FormValidation.formValidation(
+				KTUtil.getById('kt_user_form'),
+				{
+					fields: {
+						username: {
+							validators: {
+								notEmpty: {
+									message: 'L‘identifiant est requis'
+								}
+							}
+						},
+						password: {
+							validators: {
+								notEmpty: {
+									message: 'Le mot de passe est requis'
+								}
+							}
+						},
+						firstname: {
+							validators: {
+								notEmpty: {
+									message: 'Le prénom est requis'
+								}
+							}
+						},
+						lastname: {
+							validators: {
+								notEmpty: {
+									message: 'Le nom est requis'
+								}
+							}
+						},
+						email: {
+							validators: {
+								notEmpty: {
+									message: 'L‘email est requis'
+								}
+							}
+						},
+						role: {
+							validators: {
+								notEmpty: {
+									message: 'Le rôle est requis'
+								}
+							}
+						},
+					},
+					plugins: {
+	                    trigger: new FormValidation.plugins.Trigger(),
+	                    submitButton: new FormValidation.plugins.SubmitButton(),
+	                    //defaultSubmit: new FormValidation.plugins.DefaultSubmit(), // Uncomment this line to enable normal button submit after form validation
+						bootstrap: new FormValidation.plugins.Bootstrap()
+					}
+				}
+			);
+
+	        // Handle submit button
+	        $('#kt_user_submit').on('click', function (e) {
+	            e.preventDefault();
+	            var currentForm = $(this).closest('form');
+
+	            validation.validate().then(function(status) {
+			        if (status != 'Valid') {
+						swal.fire({
+			                text: "Attention ! Il semblerait que certains champs requis n'aient pas été renseignés.",
+			                icon: "error",
+			                buttonsStyling: false,
+			                confirmButtonText: "C'est compris",
+	                        customClass: {
+	    						confirmButton: "btn font-weight-bold btn-light-primary"
+	    					}
+			            }).then(function() {
+							KTUtil.scrollTop();
+						});
+					} else {
+						currentForm.submit();
+					}
+			    });
+	        });
+
+	    }
+    };
+
+    var initCategoryFormValidation = function() {
+
+    	if ($('#kt_category_form').length) {
+
+	        var validation;
+
+	        // Init form validation rules. For more info check the FormValidation plugin's official documentation:https://formvalidation.io/
+	        validation = FormValidation.formValidation(
+				KTUtil.getById('kt_category_form'),
+				{
+					fields: {
+						name: {
+							validators: {
+								notEmpty: {
+									message: 'Le nom de la famille de produit est requis'
+								}
+							}
+						},
+					},
+					plugins: {
+	                    trigger: new FormValidation.plugins.Trigger(),
+	                    submitButton: new FormValidation.plugins.SubmitButton(),
+	                    //defaultSubmit: new FormValidation.plugins.DefaultSubmit(), // Uncomment this line to enable normal button submit after form validation
+						bootstrap: new FormValidation.plugins.Bootstrap()
+					}
+				}
+			);
+
+	        // Handle submit button
+	        $('#kt_category_submit').on('click', function (e) {
+	            e.preventDefault();
+	            var currentForm = $(this).closest('form');
+
+	            validation.validate().then(function(status) {
+			        if (status != 'Valid') {
+						swal.fire({
+			                text: "Attention ! Il semblerait que certains champs requis n'aient pas été renseignés.",
+			                icon: "error",
+			                buttonsStyling: false,
+			                confirmButtonText: "C'est compris",
+	                        customClass: {
+	    						confirmButton: "btn font-weight-bold btn-light-primary"
+	    					}
+			            }).then(function() {
+							KTUtil.scrollTop();
+						});
+					} else {
+						currentForm.submit();
+					}
+			    });
+	        });
+
+	    }
     };
 
     return {
@@ -178,6 +478,13 @@ var KTApp = function() {
             initCards();
             initStickyCard();
             initAbsoluteDropdowns();
+            initQuickUserToggleTrigger();
+            initSwalNotifications();
+            initModalStock();
+            initShowHistory();
+            initModalBarcode();
+            initUserFormValidation();
+            initCategoryFormValidation();
         },
 
         initTooltips: function() {
@@ -2416,7 +2723,7 @@ var KTOffcanvas = function(elementId, options) {
             return (the.state == 'shown' ? true : false);
         },
 
-        toggle: function() {
+        toggle: function() {;
             Plugin.eventTrigger('toggle');
 
             if (the.state == 'shown') {
@@ -4859,8 +5166,7 @@ var KTWizard = function(elementId, options) {
     // Default options
     var defaultOptions = {
         startStep: 1,
-        clickableSteps: false, // to make steps clickable this set value true and add data-wizard-clickable="true" in HTML for class="wizard" element
-        navigation: true
+        clickableSteps: false // to make steps clickable this set value true and add data-wizard-clickable="true" in HTML for class="wizard" element
     };
 
     ////////////////////////////
@@ -4926,40 +5232,31 @@ var KTWizard = function(elementId, options) {
          * Build Form Wizard
          */
         build: function() {
-            if (the.options.navigation) {
-                // Next button event handler
-                KTUtil.addEvent(the.btnNext, 'click', function(e) {
-                    e.preventDefault();
+            // Next button event handler
+            KTUtil.addEvent(the.btnNext, 'click', function(e) {
+                e.preventDefault();
 
-                    // Set new step number
-                    Plugin.setNewStep(Plugin.getNextStep());
+                // Set new step number
+                Plugin.setNewStep(Plugin.getNextStep());
 
-                    // Trigger change event
-                    if (Plugin.eventTrigger('change') !== false) {
-                        Plugin.goTo(Plugin.getNextStep());
-                    }
-                });
+                // Trigger change event
+                if (Plugin.eventTrigger('change') !== false) {
+                    Plugin.goTo(Plugin.getNextStep());
+                }
+            });
 
-                // Prev button event handler
-                KTUtil.addEvent(the.btnPrev, 'click', function(e) {
-                    e.preventDefault();
+            // Prev button event handler
+            KTUtil.addEvent(the.btnPrev, 'click', function(e) {
+                e.preventDefault();
 
-                    // Set new step number
-                    Plugin.setNewStep(Plugin.getPrevStep());
+                // Set new step number
+                Plugin.setNewStep(Plugin.getPrevStep());
 
-                    // Trigger change event
-                    if (Plugin.eventTrigger('change') !== false) {
-                        Plugin.goTo(Plugin.getPrevStep());
-                    }
-                });
-
-                // Submit button event handler
-                KTUtil.addEvent(the.btnSubmit, 'click', function(e) {
-                    e.preventDefault();
-
-                    Plugin.eventTrigger('submit');
-                });
-            }
+                // Trigger change event
+                if (Plugin.eventTrigger('change') !== false) {
+                    Plugin.goTo(Plugin.getPrevStep());
+                }
+            });
 
             if (the.options.clickableSteps === true) {
                 KTUtil.on(element, '[data-wizard-type="step"]', 'click', function() {
@@ -4975,6 +5272,13 @@ var KTWizard = function(elementId, options) {
                     }
                 });
             }
+
+            // Submit button event handler
+            KTUtil.addEvent(the.btnSubmit, 'click', function(e) {
+                e.preventDefault();
+
+                Plugin.eventTrigger('submit');
+            });
         },
 
         /**
@@ -5327,7 +5631,7 @@ if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
 			 ** PRIVATE METHODS
 			 ********************/
 			isInit: false,
-			cellOffset: 108,
+			cellOffset: 110,
 			iconOffset: 15,
 			stateId: 'meta',
 			ajaxParams: {},
@@ -5567,11 +5871,9 @@ if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
 						dropdownMenu.css('z-index', '2000');
 					}
 				}).on('hide.bs.dropdown', '.' + pfx + 'datatable .' + pfx + 'datatable-body', function(e) {
-					if (typeof dropdownMenu !== 'undefined') {
-						$(e.target).append(dropdownMenu.detach());
-						dropdownMenu.hide();
-						dropdownMenu.css('display', '');
-					}
+					$(e.target).append(dropdownMenu.detach());
+					dropdownMenu.hide();
+					dropdownMenu.css('display', '');
 				});
 
 				// remove dropdown if window resize
@@ -9139,7 +9441,7 @@ KTUtil.ready(function() {
 
     // Init Header Menu
     if (typeof KTLayoutHeaderMenu !== 'undefined') {
-        KTLayoutHeaderMenu.init('kt_header_menu', 'kt_header_navs');
+        KTLayoutHeaderMenu.init('kt_header_menu', 'kt_header_menu_wrapper');
     }
 
     // Init Header Topbar For Mobile Mode
@@ -9247,9 +9549,14 @@ KTUtil.ready(function() {
         KTLayoutQuickCartPanel.init('kt_quick_cart');
     }
 
-    // Init Dropdown Search
+    // Init Search For Quick Search Dropdown
     if (typeof KTLayoutSearch !== 'undefined') {
         KTLayoutSearch().init('kt_quick_search_dropdown');
+    }
+
+    // Init Search For Quick Search Offcanvas Panel
+    if (typeof KTLayoutSearchOffcanvas !== 'undefined') {
+        KTLayoutSearchOffcanvas().init('kt_quick_search_offcanvas');
     }
 });
 
@@ -9257,6 +9564,7 @@ KTUtil.ready(function() {
 
 var KTLayoutAsideMenu = function() {
     // Private properties
+    var _body;
     var _element;
     var _menuObject;
 
@@ -9265,11 +9573,15 @@ var KTLayoutAsideMenu = function() {
 		var menuDesktopMode = (KTUtil.attr(_element, 'data-menu-dropdown') === '1' ? 'dropdown' : 'accordion');
         var scroll;
 
-		if (KTUtil.isBreakpointDown('lg') && KTUtil.attr(_element, 'data-menu-scroll') === '1') {
+		if (KTUtil.attr(_element, 'data-menu-scroll') === '1') {
 			scroll = {
 				rememberPosition: true, // remember position on page reload
 				height: function() { // calculate available scrollable area height
 					var height = parseInt(KTUtil.getViewPort().height);
+
+					if (KTUtil.isBreakpointUp('lg')) {
+						height = height - KTLayoutBrand.getHeight();
+					}
 
 					height = height - (parseInt(KTUtil.css(_element, 'marginBottom')) + parseInt(KTUtil.css(_element, 'marginTop')));
 
@@ -9296,9 +9608,75 @@ var KTLayoutAsideMenu = function() {
 		});
 	}
 
+    var _initHover = function() {
+        // Handle Minimized Aside Hover
+		if (KTUtil.hasClass(_body, 'aside-fixed') && KTUtil.hasClass(_body, 'aside-minimize-hoverable')) {
+			var insideTm;
+			var outsideTm;
+
+            // Handle Aside Hover Mode
+			KTUtil.addEvent(_element, 'mouseenter', function(e) {
+				e.preventDefault();
+
+				if (KTUtil.isBreakpointUp('lg') === false) {
+					return;
+				}
+
+				if (outsideTm) {
+					clearTimeout(outsideTm);
+					outsideTm = null;
+				}
+
+                if (insideTm) {
+					clearTimeout(insideTm);
+					insideTm = null;
+				}
+
+				insideTm = setTimeout(function() {
+					if (KTUtil.hasClass(_body, 'aside-minimize') && KTUtil.isBreakpointUp('lg')) {
+						// Hover class
+						KTUtil.addClass(_body, 'aside-minimize-hover');
+
+						KTLayoutAsideMenu.getMenu().scrollUpdate();
+						KTLayoutAsideMenu.getMenu().scrollTop();
+					}
+				}, 50);
+			});
+
+			KTUtil.addEvent(KTLayoutAside.getElement(), 'mouseleave', function(e) {
+				e.preventDefault();
+
+				if (KTUtil.isBreakpointUp('lg') === false) {
+					return;
+				}
+
+				if (insideTm) {
+					clearTimeout(insideTm);
+					insideTm = null;
+				}
+
+                if (outsideTm) {
+					clearTimeout(outsideTm);
+					outsideTm = null;
+				}
+
+				outsideTm = setTimeout(function() {
+				    if (KTUtil.hasClass(_body, 'aside-minimize-hover') && KTUtil.isBreakpointUp('lg')) {
+					    KTUtil.removeClass(_body, 'aside-minimize-hover');
+
+						// Hover class
+                        KTLayoutAsideMenu.getMenu().scrollUpdate();
+						KTLayoutAsideMenu.getMenu().scrollTop();
+					}
+				}, 100);
+			});
+		}
+	}
+
     // Public methods
 	return {
 		init: function(id) {
+            _body = KTUtil.getBody();
             _element = KTUtil.getById(id);
 
             if (!_element) {
@@ -9307,6 +9685,7 @@ var KTLayoutAsideMenu = function() {
 
             // Initialize menu
             _init();
+            _initHover();
 		},
 
 		getElement: function() {
@@ -9334,6 +9713,86 @@ var KTLayoutAsideMenu = function() {
 // Webpack support
 if (typeof module !== 'undefined') {
 	module.exports = KTLayoutAsideMenu;
+}
+
+"use strict";
+
+var KTLayoutAsideToggle = function() {
+    // Private properties
+    var _body;
+    var _element;
+    var _toggleObject;
+
+	// Initialize
+	var _init = function() {
+		_toggleObject = new KTToggle(_element, _body, {
+			targetState: 'aside-minimize',
+			toggleState: 'active'
+		});
+
+		_toggleObject.on('toggle', function(toggle) {
+            // Update sticky card
+            if (typeof KTLayoutStickyCard !== 'undefined') {
+                KTLayoutStickyCard.update();
+            }
+
+            // Pause header menu dropdowns
+            if (typeof KTLayoutHeaderMenu !== 'undefined') {
+                KTLayoutHeaderMenu.pauseDropdownHover(800);
+            }
+
+            // Pause aside menu dropdowns
+            if (typeof KTLayoutAsideMenu !== 'undefined') {
+                KTLayoutAsideMenu.pauseDropdownHover(800);
+            }
+
+            // Remember state in cookie
+			KTCookie.setCookie('kt_aside_toggle_state', toggle.getState());
+			// to set default minimized left aside use this cookie value in your
+			// server side code and add "kt-primary--minimize aside-minimize" classes to
+			// the body tag in order to initialize the minimized left aside mode during page loading.
+		});
+
+		_toggleObject.on('beforeToggle', function(toggle) {
+			if (KTUtil.hasClass(_body, 'aside-minimize') === false && KTUtil.hasClass(_body, 'aside-minimize-hover')) {
+				KTUtil.removeClass(_body, 'aside-minimize-hover');
+			}
+		});
+	}
+
+    // Public methods
+	return {
+		init: function(id) {
+            _element = KTUtil.getById(id);
+            _body = KTUtil.getBody();
+
+            if (!_element) {
+                return;
+            }
+
+            // Initialize
+            _init();
+		},
+
+        getElement: function() {
+            return _element;
+        },
+
+        getToggle: function() {
+			return _toggleObject;
+		},
+
+		onToggle: function(handler) {
+			if (typeof _toggleObject.element !== 'undefined') {
+				_toggleObject.on('toggle', handler);
+			}
+		}
+	};
+}();
+
+// Webpack support
+if (typeof module !== 'undefined') {
+	module.exports = KTLayoutAsideToggle;
 }
 
 "use strict";
@@ -9381,6 +9840,18 @@ var KTLayoutAside = function() {
 
         getOffcanvas: function() {
             return _offcanvasObject;
+        },
+
+        isFixed: function() {
+            return KTUtil.hasClass(_body, 'aside-fixed');
+        },
+
+        isMinimized: function() {
+            return (KTUtil.hasClass(_body, 'aside-fixed') && KTUtil.hasClass(_body, 'aside-minimize'));
+        },
+
+        isHoverable: function() {
+            return (KTUtil.hasClass(_body, 'aside-fixed') && KTUtil.hasClass(_body, 'aside-minimize-hoverable'));
         }
 	};
 }();
@@ -9388,6 +9859,48 @@ var KTLayoutAside = function() {
 // Webpack support
 if (typeof module !== 'undefined') {
 	module.exports = KTLayoutAside;
+}
+
+"use strict";
+
+var KTLayoutBrand = function() {
+    // Private properties
+    var _element;
+
+    // Private functions
+    var _getHeight = function() {
+        var height = 0;
+
+        if (_element) {
+            height = KTUtil.actualHeight(_element);
+        }
+
+        return height;
+    }
+
+    // Public methods
+	return {
+		init: function(id) {
+            _element = KTUtil.getById(id);
+
+            if (!_element) {
+                return;
+            }
+		},
+
+        getElement: function() {
+            return _element;
+        },
+
+        getHeight: function() {
+            return _getHeight();
+        }
+	};
+}();
+
+// Webpack support
+if (typeof module !== 'undefined') {
+	module.exports = KTLayoutBrand;
 }
 
 "use strict";
@@ -9404,7 +9917,7 @@ var KTLayoutContent = function() {
 
         if (_element) {
             height = height - parseInt(KTUtil.css(_element, 'paddingTop')) - parseInt(KTUtil.css(_element, 'paddingBottom'));
-        }        
+        }
 
         height = height - KTLayoutHeader.getHeight();
         height = height - KTLayoutSubheader.getHeight();
@@ -9480,20 +9993,19 @@ var KTLayoutHeaderMenu = function() {
     var _menuObject;
     var _offcanvasElement;
     var _offcanvasObject;
-	var _mobileTabPanes;
 
     // Private functions
 	var _init = function() {
 		_offcanvasObject = new KTOffcanvas(_offcanvasElement, {
 			overlay: true,
-			baseClass: 'header-navs',
-			closeBy: 'kt_header_mobile_close',
+			baseClass: 'header-menu-wrapper',
+			closeBy: 'kt_header_menu_mobile_close_btn',
 			toggleBy: {
 				target: 'kt_header_mobile_toggle',
-				state: 'burge-icon-active'
+				state: 'mobile-toggle-active'
 			}
 		});
-
+		
 		_menuObject = new KTMenu(_menuElement, {
 			submenu: {
 				desktop: 'dropdown',
@@ -9505,47 +10017,13 @@ var KTLayoutHeaderMenu = function() {
 				expandAll: false // allow having multiple expanded accordions in the menu
 			}
 		});
-	}
 
-	var _initTabPanesForMobile = function() {
-		if ( _mobileTabPanes ) {
-			for (var i = 0, len = _mobileTabPanes.length; i < len; i++) {
-				var mobileTabPane = _mobileTabPanes[i];
-				var tabs = KTUtil.find(_offcanvasElement, '.header-tabs');
-
-				KTUtil.scrollInit(mobileTabPane, {
-		            disableForMobile: true,
-		            resetHeightOnDestroy: true,
-		            handleWindowResize: true,
-		            height: function() {
-						// Destroy for tablet and mobile modes
-						if (KTUtil.isBreakpointUp('lg')) {
-							return false;
-						}
-
-		                var height = parseInt(KTUtil.getViewPort().height);
-
-		                if (tabs) {
-		                    height = height - parseInt(KTUtil.actualHeight(tabs));
-		                    height = height - parseInt(KTUtil.css(tabs, 'marginTop'));
-		                    height = height - parseInt(KTUtil.css(tabs, 'marginBottom'));
-		                }
-
-		                if (mobileTabPane) {
-		                    height = height - parseInt(KTUtil.css(mobileTabPane, 'marginTop'));
-		                    height = height - parseInt(KTUtil.css(mobileTabPane, 'marginBottom'));
-		                }
-
-		                height = height - parseInt(KTUtil.css(_offcanvasElement, 'paddingTop'));
-		                height = height - parseInt(KTUtil.css(_offcanvasElement, 'paddingBottom'));
-
-		                height = height - 2;
-
-		                return height;
-		            }
-		        });
-			}
-		}
+		// Close aside offcanvas panel before page reload On tablet and mobile
+        _menuObject.on('linkClick', function(menu) {
+            if (KTUtil.isBreakpointDown('lg')) { // Tablet and mobile mode
+                _offcanvasObject.hide(); // Hide offcanvas after general link click
+            }
+        });
 	}
 
     // Public methods
@@ -9553,7 +10031,6 @@ var KTLayoutHeaderMenu = function() {
         init: function(menuId, offcanvasId) {
             _menuElement = KTUtil.getById(menuId);
             _offcanvasElement = KTUtil.getById(offcanvasId);
-			_mobileTabPanes = KTUtil.findAll(_offcanvasElement, '.tab-pane');
 
             if (!_menuElement) {
                 return;
@@ -9561,7 +10038,6 @@ var KTLayoutHeaderMenu = function() {
 
             // Initialize menu
             _init();
-			_initTabPanesForMobile();
 		},
 
 		getMenuElement: function() {
@@ -9608,10 +10084,10 @@ var KTLayoutHeaderTopbar = function() {
 
     // Private functions
     var _init = function() {
-		_toggleObject = new KTToggle(_toggleElement, KTUtil.getBody(), {
-			targetState: 'topbar-mobile-on',
-			toggleState: 'active'
-		});
+        _toggleObject = new KTToggle(_toggleElement, KTUtil.getBody(), {
+            targetState: 'topbar-mobile-on',
+            toggleState: 'active',
+        });
     }
 
     // Public methods
@@ -9646,7 +10122,8 @@ var KTLayoutHeader = function() {
     var _elementForMobile;
     var _object;
 
-    // Get height
+	// Private functions
+    // Get Height
     var _getHeight = function() {
         var height = 0;
 
@@ -9657,7 +10134,7 @@ var KTLayoutHeader = function() {
         return height;
     }
 
-    // Get height
+    // Get Height
     var _getHeightForMobile = function() {
         var height;
 
@@ -9666,7 +10143,7 @@ var KTLayoutHeader = function() {
         return height;
     }
 
-    // Public methods
+    // Public Methods
 	return {
 		init: function(id, idForMobile) {
             _element = KTUtil.getById(id);

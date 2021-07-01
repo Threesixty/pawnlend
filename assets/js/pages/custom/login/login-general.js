@@ -28,14 +28,14 @@ var KTLogin = function() {
 					username: {
 						validators: {
 							notEmpty: {
-								message: 'Username is required'
+								message: 'L‘identifiant est requis'
 							}
 						}
 					},
 					password: {
 						validators: {
 							notEmpty: {
-								message: 'Password is required'
+								message: 'Le mot de passe est requis'
 							}
 						}
 					}
@@ -51,14 +51,15 @@ var KTLogin = function() {
 
         $('#kt_login_signin_submit').on('click', function (e) {
             e.preventDefault();
+            var currentForm = $(this).closest('form');
 
             validation.validate().then(function(status) {
-		        if (status == 'Valid') {
-                    swal.fire({
-		                text: "All is cool! Now you submit this form",
-		                icon: "success",
+		        if (status != 'Valid') {
+					swal.fire({
+		                text: "Attention ! Il semblerait que certains champs requis n'aient pas été renseignés.",
+		                icon: "error",
 		                buttonsStyling: false,
-		                confirmButtonText: "Ok, got it!",
+		                confirmButtonText: "C'est compris",
                         customClass: {
     						confirmButton: "btn font-weight-bold btn-light-primary"
     					}
@@ -66,17 +67,7 @@ var KTLogin = function() {
 						KTUtil.scrollTop();
 					});
 				} else {
-					swal.fire({
-		                text: "Sorry, looks like there are some errors detected, please try again.",
-		                icon: "error",
-		                buttonsStyling: false,
-		                confirmButtonText: "Ok, got it!",
-                        customClass: {
-    						confirmButton: "btn font-weight-bold btn-light-primary"
-    					}
-		            }).then(function() {
-						KTUtil.scrollTop();
-					});
+					currentForm.submit();
 				}
 		    });
         });
@@ -103,47 +94,61 @@ var KTLogin = function() {
 			form,
 			{
 				fields: {
-					fullname: {
+					firstname: {
 						validators: {
 							notEmpty: {
-								message: 'Username is required'
+								message: 'Votre prénom est requis'
+							}
+						}
+					},
+					lastname: {
+						validators: {
+							notEmpty: {
+								message: 'Votre nom est requis'
+							}
+						}
+					},
+					username: {
+						validators: {
+							notEmpty: {
+								message: 'Veuillez choisir un identifiant'
 							}
 						}
 					},
 					email: {
                         validators: {
 							notEmpty: {
-								message: 'Email address is required'
+								message: 'Votre adresse email est requise'
 							},
                             emailAddress: {
-								message: 'The value is not a valid email address'
+								message: 'L‘adresse email saisie n‘est pas valide'
 							}
 						}
 					},
                     password: {
                         validators: {
                             notEmpty: {
-                                message: 'The password is required'
+                                message: 'Veuillez choisir un mot de passe'
                             }
                         }
                     },
                     cpassword: {
                         validators: {
                             notEmpty: {
-                                message: 'The password confirmation is required'
+                                message: 'La confirmation du mot de passe est requise'
                             },
                             identical: {
                                 compare: function() {
                                     return form.querySelector('[name="password"]').value;
                                 },
-                                message: 'The password and its confirm are not the same'
+                                message: 'Les mots de passe saisis ne sont pas identiques'
                             }
                         }
                     },
                     agree: {
                         validators: {
                             notEmpty: {
-                                message: 'You must accept the terms and conditions'
+                                message: 'Vous devez accepter les conditions générales d‘utilisation'
                             }
                         }
                     },
@@ -157,14 +162,15 @@ var KTLogin = function() {
 
         $('#kt_login_signup_submit').on('click', function (e) {
             e.preventDefault();
+            var currentForm = $(this).closest('form');
 
             validation.validate().then(function(status) {
-		        if (status == 'Valid') {
-                    swal.fire({
-		                text: "All is cool! Now you submit this form",
-		                icon: "success",
+		        if (status != 'Valid') {
+					swal.fire({
+		                text: "Attention ! Il semblerait que certains champs requis n'aient pas été renseignés.",
+		                icon: "error",
 		                buttonsStyling: false,
-		                confirmButtonText: "Ok, got it!",
+		                confirmButtonText: "C'est compris",
                         customClass: {
     						confirmButton: "btn font-weight-bold btn-light-primary"
     					}
@@ -172,17 +178,7 @@ var KTLogin = function() {
 						KTUtil.scrollTop();
 					});
 				} else {
-					swal.fire({
-		                text: "Sorry, looks like there are some errors detected, please try again.",
-		                icon: "error",
-		                buttonsStyling: false,
-		                confirmButtonText: "Ok, got it!",
-                        customClass: {
-    						confirmButton: "btn font-weight-bold btn-light-primary"
-    					}
-		            }).then(function() {
-						KTUtil.scrollTop();
-					});
+					currentForm.submit();
 				}
 		    });
         });
@@ -206,10 +202,10 @@ var KTLogin = function() {
 					email: {
 						validators: {
 							notEmpty: {
-								message: 'Email address is required'
+								message: 'Votre adresse email est requise'
 							},
                             emailAddress: {
-								message: 'The value is not a valid email address'
+								message: 'L‘adresse email saisie n‘est pas valide'
 							}
 						}
 					}
@@ -224,23 +220,23 @@ var KTLogin = function() {
         // Handle submit button
         $('#kt_login_forgot_submit').on('click', function (e) {
             e.preventDefault();
+            var currentForm = $(this).closest('form');
 
             validation.validate().then(function(status) {
-		        if (status == 'Valid') {
-                    // Submit form
-                    KTUtil.scrollTop();
-				} else {
+		        if (status != 'Valid') {
 					swal.fire({
-		                text: "Sorry, looks like there are some errors detected, please try again.",
+		                text: "Attention ! Il semblerait que certains champs requis n'aient pas été renseignés.",
 		                icon: "error",
 		                buttonsStyling: false,
-		                confirmButtonText: "Ok, got it!",
+		                confirmButtonText: "C'est compris",
                         customClass: {
     						confirmButton: "btn font-weight-bold btn-light-primary"
     					}
 		            }).then(function() {
 						KTUtil.scrollTop();
 					});
+				} else {
+					currentForm.submit();
 				}
 		    });
         });

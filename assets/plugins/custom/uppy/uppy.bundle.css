@@ -748,10 +748,6 @@
   -webkit-padding-end: 0.3em;
 }
 
-.uppy-Root:not(.uppy-size--md) .uppy-StatusBar-additionalInfo {
-  display: none;
-}
-
 .uppy-StatusBar-statusPrimary {
   font-weight: 500;
   line-height: 1;
@@ -3636,6 +3632,10 @@ button.uppy-Dashboard-Item-progressIndicator:focus .uppy-Dashboard-Item-progress
   left: 0;
   width: 100%;
   height: 100%;
+}
+
+.uppy-Dashboard:not(.uppy-size--md) .uppy-StatusBar-additionalInfo {
+  display: none;
 }
 
 .uppy-Dashboard-filesContainer {
