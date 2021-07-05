@@ -5,6 +5,8 @@
  * For commercial licenses see https://www.tiny.cloud/
  */
 .tox {
+  -webkit-box-shadow: none;
+  box-shadow: none;
   -webkit-box-sizing: content-box;
   box-sizing: content-box;
   color: #2a3746;
@@ -45,6 +47,8 @@
 .tox :not(svg):not(rect) {
   background: 0 0;
   border: 0;
+  -webkit-box-shadow: none;
+  box-shadow: none;
   float: none;
   height: auto;
   margin: 0;
@@ -92,6 +96,7 @@
 }
 
 .tox-tinymce-inline .tox-editor-header {
+  background-color: transparent;
   border: 1px solid #000;
   border-radius: 0;
   -webkit-box-shadow: none;
@@ -2114,6 +2119,7 @@ body.tox-dialog__disable-scroll {
 }
 
 .tox.tox-tinymce--toolbar-sticky-on .tox-editor-header {
+  background-color: transparent;
   -webkit-box-shadow: 0 4px 4px -3px rgba(0, 0, 0, 0.25);
   box-shadow: 0 4px 4px -3px rgba(0, 0, 0, 0.25);
 }
@@ -2646,6 +2652,7 @@ body.tox-dialog__disable-scroll {
 }
 
 .tox.tox-tinymce.tox-fullscreen {
+  background-color: transparent;
   z-index: 1200;
 }
 
@@ -3564,7 +3571,7 @@ body.tox-dialog__disable-scroll {
 }
 
 .tox .tox-throbber {
-  z-index: 1400;
+  z-index: 1299;
 }
 
 .tox .tox-throbber__busy-spinner {

@@ -51,6 +51,7 @@ var KTDatatableAutoColumnHideDemo = function() {
 				}, {
 					field: 'CompanyEmail',
 					title: 'Email',
+					width: 'auto',
 				}, {
 					field: 'ShipDate',
 					title: 'Ship Date',
@@ -59,6 +60,7 @@ var KTDatatableAutoColumnHideDemo = function() {
 				}, {
 					field: 'CompanyName',
 					title: 'Company Name',
+					width: 'auto',
 				}, {
 					field: 'ShipAddress',
 					title: 'Ship Address',
