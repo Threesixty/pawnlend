@@ -55,16 +55,6 @@ class MainController {
 		if ($this->_config['routes'][$route]['auth'] && !$user)
 			$this->goSignin();
 
-		# User history
-		$history = new History($this->_dbConn);
-		$currentUserHistories = $history->findBy('id_user', $user['id'], false);
-		if (null !== $currentUserHistories) {
-			$product = new Product($this->_dbConn);
-			foreach ($currentUserHistories as $key => $history) {
-				$currentUserHistories[$key]['product'] = $product->findBy('id', $history['id_product']);
-			}
-		}
-
 		switch ($route) {
 			case 'connexion':
 				if ($this->_session->get('user'))
@@ -259,8 +249,8 @@ class MainController {
 		$params = [];
 		$history = new History($this->_dbConn);
 
-		$params['histories'] = Helper::getDashboardHistory($history->getHistories(20), $this->_dbConn);
-		$params['charts'] = Helper::getDashboardChart($history->getHistories(false, 'ASC'), $this->_dbConn);
+		$params['histories'] = null;
+		$params['charts'] = null;
 
 		return $params;
 	}

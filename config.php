@@ -4,7 +4,7 @@ setlocale(LC_ALL, 'fr_FR.utf8');
 
 $config = [
 	'db' => [
-		'name' => '2021_bdd_prj_tsm_tp1',
+		'name' => 'pawnlend',
 		'user' => 'root',
 		'pwd' => '',
 		'host' => 'localhost',
