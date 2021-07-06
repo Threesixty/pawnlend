@@ -84,7 +84,7 @@ $title = 'Liste des produits'; ?>
 														<ul class="nav nav-hoverable flex-column history-parent" data-id="<?= $product->id ?>" data-url="<?= Helper::getUrl('historiqueProduit') ?>">
 
 															<?php
-															if ($user['role'] == 1 || $user['role'] == 3) { ?>
+															if (false && $user['role'] == 1 || $user['role'] == 3) { ?>
 													    		<li class="nav-item">
 													    			<a class="nav-link text-hover-primary update-modal-inc" href="javascript:void(0)" data-toggle="modal" data-target="#modalIncStock">
 													    				<i class="nav-icon fas fa-plus"></i>
@@ -93,7 +93,7 @@ $title = 'Liste des produits'; ?>
 													    		</li>
 													    	<?php }
 
-															if ($user['role'] == 2 || $user['role'] == 3) { ?>
+															if (false && $user['role'] == 2 || $user['role'] == 3) { ?>
 													    		<li class="nav-item">
 													    			<a class="nav-link text-hover-warning update-modal-dec" href="javascript:void(0)" data-toggle="modal" data-target="#modalDecStock">
 													    				<i class="nav-icon fas fa-share"></i>
@@ -107,7 +107,7 @@ $title = 'Liste des produits'; ?>
 												    		<li class="nav-item">
 												    			<a class="nav-link text-hover-dark kt_quick_panel_toggle" href="javascript:void(0)">
 												    				<i class="nav-icon fas la-list"></i>
-												    				<span class="text-hover-dark">Historique</span>
+												    				<span class="text-hover-dark">En cours...</span>
 												    			</a>
 												    		</li>
 														</ul>
