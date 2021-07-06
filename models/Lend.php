@@ -1,6 +1,7 @@
 <?php
 require_once('components/Helper.php');
 require_once('components/Database.php');
+require_once('models/LendProduct.php');
 
 class Lend {
 
@@ -78,17 +79,32 @@ class Lend {
 
     public function save($lend) {
 
+
+		$lendProduct = new LendProduct($this->_conn);
+
     	$action = false;
     	if (isset($lend['id'])) {
 			$sql = 'UPDATE lend SET reference = "'.$lend['reference'].'", client_id = "'.$lend['client_id'].'", startdate = "'.$lend['start'].'", enddate = "'.$lend['end'].'", status = "'.$lend['status'].'", user_id = "'.$lend['user_id'].'" WHERE id = '.$lend['id'];
-    	} else {
 
+			$deleteLendProducts = $lendProduct->deleteLendProducts($lend['id']);
+    	} else {
     		$action = 'redirect';
 			$sql = 'INSERT INTO lend (reference, client_id, startdate, enddate, status, user_id, created_at) VALUES ("'.$lend['reference'].'", "'.$lend['client_id'].'", "'.$lend['startdate'].'", "'.$lend['enddate'].'", "'.$lend['status'].'", "'.$lend['user_id'].'", "'.$lend['created_at'].'", "'.time().'")';
     	}
 
 		try {
 			$res = $this->_conn->query($sql);
+
+	    	if ($res && isset($lend['products']) && !empty($lend['products'])) {
+	    		foreach ($lend['products'] as $productId) {
+	    			$currentLendProduct = [];
+	    			$currentLendProduct['lend_id'] = $res['id'];
+	    			$isLot = explode('-', $productId);
+	    			$currentLendProduct['type'] = count($isLot) > 1 ? 'lot' : 'product';
+	    			$currentLendProduct['type_id'] = count($isLot) > 1 ? $isLot[1] : $productId;
+	    			$currentLendProduct['quantity'] = 1;
+	    		}
+	    	}
 
 			return $res ? [
 						'status' => 'success',

@@ -237,7 +237,7 @@ $title = 'Ajouter un prêt'; ?>
 
 																foreach ($productLots as $productLot) {
 																	$selected = null !== $currentLendProducts && array_search($productLot->id, array_column($currentLendProducts, 'product_lot_id')) ? 'selected' : ''; ?>
-																	<option value="<?= $productLot['id'] ?>">LOT - <?= $productLot['name'] ?></option>
+																	<option value="lot-<?= $productLot['id'] ?>">LOT - <?= $productLot['name'] ?></option>
 																<?php } ?>
 															</select>
 														</div>
@@ -266,7 +266,7 @@ $title = 'Ajouter un prêt'; ?>
 										<!--begin::Step 4-->
 										<div class="pb-5" data-wizard-type="step-content">
 											<h4 class="mb-10 font-weight-bold text-center">Vérification des données saisies</h4>
-											<h6 class="font-weight-bold text-uppercase mb-3">Désignation :</h6>
+											<h6 class="font-weight-bold text-uppercase mb-3">Identification :</h6>
 											<table class="w-100">
 												<tr>
 													<td class="font-weight-bold text-muted">Nom du produit :</td>

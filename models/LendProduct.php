@@ -8,8 +8,8 @@ class LendProduct {
 
 	public $id;
 	public $lendId;
-	public $product_lot_id;
-	public $product_id;
+	public $type;
+	public $type_id;
 	public $quantity;
 
 	public function __construct($dB) {
@@ -67,16 +67,27 @@ class LendProduct {
 		}
 	}
 
+	public function deleteLendProducts($lendId) {
+
+		$sql = 'DELETE FROM lend_product WHERE lendId = '.intval($lendId);
+
+		try {
+			$res = $this->_conn->query($sql);
+
+			return $res;
+
+		} catch(PDOException $e) {
+			return [
+					'status' => 'error',
+					'msg' => $e->getMessage()
+				];
+		}
+	}
+
     public function save($lendProduct) {
 
     	$action = false;
-    	if (isset($lendProduct['id'])) {
-			$sql = 'UPDATE lend_product SET client_id = "'.$lendProduct['client_id'].'", startdate = "'.$lendProduct['start'].'", enddate = "'.$lendProduct['end'].'", user_id = "'.$lendProduct['user_id'].'" WHERE id = '.$lendProduct['id'];
-    	} else {
-
-    		$action = 'redirect';
-			$sql = 'INSERT INTO lend_product (client_id, startdate, enddate, user_id, created_at) VALUES ("'.$lendProduct['client_id'].'", "'.$lendProduct['startdate'].'", "'.$lendProduct['enddate'].'", "'.$lendProduct['user_id'].'", "'.$lendProduct['created_at'].'", "'.time().'")';
-    	}
+		$sql = 'INSERT INTO lend_product (lend_id, type, type_id, quantity) VALUES ("'.$lendProduct['lend_id'].'", "'.$lendProduct['type'].'", "'.$lendProduct['type_id'].'", "'.$lendProduct['quantity'].'", "'.time().'")';
 
 		try {
 			$res = $this->_conn->query($sql);
