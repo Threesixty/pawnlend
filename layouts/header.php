@@ -40,7 +40,8 @@ require_once('components/Helper.php'); ?>
 			<!--begin::Logo-->
 			<a href="<?= Helper::getUrl('index') ?>">
 				<span class="logo">
-										<img alt="Logo" src="assets/media/logos/logo-dark.png"></span>
+					<img alt="Logo" src="assets/media/logos/logo-dark.png">
+				</span>
 			</a>
 			<!--end::Logo-->
 			<!--begin::Toolbar-->
@@ -96,47 +97,141 @@ require_once('components/Helper.php'); ?>
 												<i class="menu-arrow"></i>
 											</a>
 										</li>
-										<li class="menu-item menu-item-submenu position-relative <?= strpos($route, 'produit') !== false ? 'menu-item-open menu-item-here' : '' ?>" data-menu-toggle="click" aria-haspopup="true">
-											<a href="javascript:;" class="menu-link menu-toggle">
-												<span class="menu-text">Gestion du stock</span>
-												<i class="menu-arrow"></i>
-											</a>
-
-											<div class="menu-submenu menu-submenu-classic menu-submenu-left">
-												<ul class="menu-subnav">
-													<li class="menu-item <?= $route == 'produits' ? 'menu-item-active' : '' ?>" aria-haspopup="true">
-														<a href="<?= Helper::getUrl('produits') ?>" class="menu-link">
-															<span class="svg-icon menu-icon">
-																<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-																	<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-																	    <rect x="0" y="0" width="24" height="24"/>
-																	    <path d="M4,7 L20,7 L20,19.5 C20,20.3284271 19.3284271,21 18.5,21 L5.5,21 C4.67157288,21 4,20.3284271 4,19.5 L4,7 Z M10,10 C9.44771525,10 9,10.4477153 9,11 C9,11.5522847 9.44771525,12 10,12 L14,12 C14.5522847,12 15,11.5522847 15,11 C15,10.4477153 14.5522847,10 14,10 L10,10 Z" fill="#000000"/>
-																	    <rect fill="#000000" opacity="0.3" x="2" y="3" width="20" height="4" rx="1"/>
-																	</g>
-																</svg>
-															</span>
-															<span class="menu-text">Liste des produits</span>
-														</a>
-													</li>
-													<li class="menu-item <?= $route == 'produit' ? 'menu-item-active' : '' ?>" aria-haspopup="true">
-														<a href="<?= Helper::getUrl('produit') ?>" class="menu-link">
-															<span class="svg-icon menu-icon">
-																<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-																	<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-																	    <rect x="0" y="0" width="24" height="24"/>
-																	    <path d="M4,7 L20,7 L20,19.5 C20,20.3284271 19.3284271,21 18.5,21 L5.5,21 C4.67157288,21 4,20.3284271 4,19.5 L4,7 Z M10,10 C9.44771525,10 9,10.4477153 9,11 C9,11.5522847 9.44771525,12 10,12 L14,12 C14.5522847,12 15,11.5522847 15,11 C15,10.4477153 14.5522847,10 14,10 L10,10 Z" fill="#000000"/>
-																	    <rect fill="#000000" opacity="0.3" x="2" y="3" width="20" height="4" rx="1"/>
-																	</g>
-																</svg>
-															</span>
-															<span class="menu-text">Ajouter un produit</span>
-														</a>
-													</li>
-												</ul>
-											</div>
-										</li>
 										<?php
+										if ($user['role'] != 2) { ?>
+
+											<li class="menu-item menu-item-submenu position-relative <?= strpos($route, 'pret') !== false ? 'menu-item-open menu-item-here' : '' ?>" data-menu-toggle="click" aria-haspopup="true">
+												<a href="javascript:;" class="menu-link menu-toggle">
+													<span class="menu-text">Gestion des prêts</span>
+													<i class="menu-arrow"></i>
+												</a>
+
+												<div class="menu-submenu menu-submenu-classic menu-submenu-left">
+													<ul class="menu-subnav">
+														<li class="menu-item <?= $route == 'prets' ? 'menu-item-active' : '' ?>" aria-haspopup="true">
+															<a href="<?= Helper::getUrl('prets') ?>" class="menu-link">
+																<span class="svg-icon menu-icon">
+																	<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+																		<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+																		    <rect x="0" y="0" width="24" height="24"/>
+																		    <path d="M4,7 L20,7 L20,19.5 C20,20.3284271 19.3284271,21 18.5,21 L5.5,21 C4.67157288,21 4,20.3284271 4,19.5 L4,7 Z M10,10 C9.44771525,10 9,10.4477153 9,11 C9,11.5522847 9.44771525,12 10,12 L14,12 C14.5522847,12 15,11.5522847 15,11 C15,10.4477153 14.5522847,10 14,10 L10,10 Z" fill="#000000"/>
+																		    <rect fill="#000000" opacity="0.3" x="2" y="3" width="20" height="4" rx="1"/>
+																		</g>
+																	</svg>
+																</span>
+																<span class="menu-text">Liste des prêts</span>
+															</a>
+														</li>
+														<li class="menu-item <?= $route == 'pret' ? 'menu-item-active' : '' ?>" aria-haspopup="true">
+															<a href="<?= Helper::getUrl('pret') ?>" class="menu-link">
+																<span class="svg-icon menu-icon">
+																	<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+																		<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+																		    <rect x="0" y="0" width="24" height="24"/>
+																		    <path d="M4,7 L20,7 L20,19.5 C20,20.3284271 19.3284271,21 18.5,21 L5.5,21 C4.67157288,21 4,20.3284271 4,19.5 L4,7 Z M10,10 C9.44771525,10 9,10.4477153 9,11 C9,11.5522847 9.44771525,12 10,12 L14,12 C14.5522847,12 15,11.5522847 15,11 C15,10.4477153 14.5522847,10 14,10 L10,10 Z" fill="#000000"/>
+																		    <rect fill="#000000" opacity="0.3" x="2" y="3" width="20" height="4" rx="1"/>
+																		</g>
+																	</svg>
+																</span>
+																<span class="menu-text">Ajouter un prêt</span>
+															</a>
+														</li>
+													</ul>
+												</div>
+											</li>
+
+										<?php }
+
+										if ($user['role'] > 1) { ?>
+
+											<li class="menu-item menu-item-submenu position-relative <?= strpos($route, 'produit') !== false ? 'menu-item-open menu-item-here' : '' ?>" data-menu-toggle="click" aria-haspopup="true">
+												<a href="javascript:;" class="menu-link menu-toggle">
+													<span class="menu-text">Gestion du stock</span>
+													<i class="menu-arrow"></i>
+												</a>
+
+												<div class="menu-submenu menu-submenu-classic menu-submenu-left">
+													<ul class="menu-subnav">
+														<li class="menu-item <?= $route == 'produits' ? 'menu-item-active' : '' ?>" aria-haspopup="true">
+															<a href="<?= Helper::getUrl('produits') ?>" class="menu-link">
+																<span class="svg-icon menu-icon">
+																	<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+																		<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+																		    <rect x="0" y="0" width="24" height="24"/>
+																		    <path d="M4,7 L20,7 L20,19.5 C20,20.3284271 19.3284271,21 18.5,21 L5.5,21 C4.67157288,21 4,20.3284271 4,19.5 L4,7 Z M10,10 C9.44771525,10 9,10.4477153 9,11 C9,11.5522847 9.44771525,12 10,12 L14,12 C14.5522847,12 15,11.5522847 15,11 C15,10.4477153 14.5522847,10 14,10 L10,10 Z" fill="#000000"/>
+																		    <rect fill="#000000" opacity="0.3" x="2" y="3" width="20" height="4" rx="1"/>
+																		</g>
+																	</svg>
+																</span>
+																<span class="menu-text">Liste des produits</span>
+															</a>
+														</li>
+														<li class="menu-item <?= $route == 'produit' ? 'menu-item-active' : '' ?>" aria-haspopup="true">
+															<a href="<?= Helper::getUrl('produit') ?>" class="menu-link">
+																<span class="svg-icon menu-icon">
+																	<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+																		<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+																		    <rect x="0" y="0" width="24" height="24"/>
+																		    <path d="M4,7 L20,7 L20,19.5 C20,20.3284271 19.3284271,21 18.5,21 L5.5,21 C4.67157288,21 4,20.3284271 4,19.5 L4,7 Z M10,10 C9.44771525,10 9,10.4477153 9,11 C9,11.5522847 9.44771525,12 10,12 L14,12 C14.5522847,12 15,11.5522847 15,11 C15,10.4477153 14.5522847,10 14,10 L10,10 Z" fill="#000000"/>
+																		    <rect fill="#000000" opacity="0.3" x="2" y="3" width="20" height="4" rx="1"/>
+																		</g>
+																	</svg>
+																</span>
+																<span class="menu-text">Ajouter un produit</span>
+															</a>
+														</li>
+													</ul>
+												</div>
+											</li>
+
+										<?php }
+
+										if ($user['role'] > 1) { ?>
+
+											<li class="menu-item menu-item-submenu position-relative <?= strpos($route, 'commande') !== false ? 'menu-item-open menu-item-here' : '' ?>" data-menu-toggle="click" aria-haspopup="true">
+												<a href="javascript:;" class="menu-link menu-toggle">
+													<span class="menu-text">Gestion des commandes</span>
+													<i class="menu-arrow"></i>
+												</a>
+
+												<div class="menu-submenu menu-submenu-classic menu-submenu-left">
+													<ul class="menu-subnav">
+														<li class="menu-item <?= $route == 'commandes' ? 'menu-item-active' : '' ?>" aria-haspopup="true">
+															<a href="<?= Helper::getUrl('commandes') ?>" class="menu-link">
+																<span class="svg-icon menu-icon">
+																	<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+																		<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+																		    <rect x="0" y="0" width="24" height="24"/>
+																		    <path d="M4,7 L20,7 L20,19.5 C20,20.3284271 19.3284271,21 18.5,21 L5.5,21 C4.67157288,21 4,20.3284271 4,19.5 L4,7 Z M10,10 C9.44771525,10 9,10.4477153 9,11 C9,11.5522847 9.44771525,12 10,12 L14,12 C14.5522847,12 15,11.5522847 15,11 C15,10.4477153 14.5522847,10 14,10 L10,10 Z" fill="#000000"/>
+																		    <rect fill="#000000" opacity="0.3" x="2" y="3" width="20" height="4" rx="1"/>
+																		</g>
+																	</svg>
+																</span>
+																<span class="menu-text">Liste des commandes</span>
+															</a>
+														</li>
+														<li class="menu-item <?= $route == 'commande' ? 'menu-item-active' : '' ?>" aria-haspopup="true">
+															<a href="<?= Helper::getUrl('commande') ?>" class="menu-link">
+																<span class="svg-icon menu-icon">
+																	<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+																		<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+																		    <rect x="0" y="0" width="24" height="24"/>
+																		    <path d="M4,7 L20,7 L20,19.5 C20,20.3284271 19.3284271,21 18.5,21 L5.5,21 C4.67157288,21 4,20.3284271 4,19.5 L4,7 Z M10,10 C9.44771525,10 9,10.4477153 9,11 C9,11.5522847 9.44771525,12 10,12 L14,12 C14.5522847,12 15,11.5522847 15,11 C15,10.4477153 14.5522847,10 14,10 L10,10 Z" fill="#000000"/>
+																		    <rect fill="#000000" opacity="0.3" x="2" y="3" width="20" height="4" rx="1"/>
+																		</g>
+																	</svg>
+																</span>
+																<span class="menu-text">Ajouter une commande</span>
+															</a>
+														</li>
+													</ul>
+												</div>
+											</li>
+
+										<?php }
+										
 										if ($user['role'] == 3) { ?>
+
 											<li class="menu-item menu-item-submenu position-relative <?= strpos($route, 'utilisateur') !== false ? 'menu-item-open menu-item-here' : '' ?>" data-menu-toggle="click" aria-haspopup="true">
 												<a href="javascript:;" class="menu-link menu-toggle">
 													<span class="menu-text">Gestion des utilisateurs</span>
@@ -209,7 +304,7 @@ require_once('components/Helper.php'); ?>
 																		</g>
 																	</svg>
 																</span>
-																<span class="menu-text">Ajouter une famille de produit</span>
+																<span class="menu-text">Ajouter une famille</span>
 															</a>
 														</li>
 													</ul>

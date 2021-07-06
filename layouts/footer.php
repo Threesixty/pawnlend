@@ -5,8 +5,8 @@
 						<div class="container-fluid d-flex flex-column flex-md-row align-items-center justify-content-between">
 							<!--begin::Copyright-->
 							<div class="text-dark order-2 order-md-1">
-								<span class="text-muted font-weight-bold mr-2"><?= date('Y') ?>©</span>
-								<a href="mailto:michael.convergence@gmail.com" target="_blank" class="text-dark-75 text-hover-primary">Michael THOMAS</a>
+								<span class="text-muted font-weight-bold mr-2">Pawnlend <?= date('Y') ?>©</span>
+								<a href="mailto:michael.convergence@gmail.com" target="_blank" class="text-dark-75 text-hover-primary">Kevin ABDI / Lucas DONATI / Michael THOMAS</a>
 							</div>
 							<!--end::Copyright-->
 							<!--begin::Nav-->

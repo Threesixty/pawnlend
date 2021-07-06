@@ -7,10 +7,12 @@ class Lend {
 	private $_conn;
 
 	public $id;
+	public $reference;
 	public $client_id;
 	public $startdate;
 	public $enddate;
-	public $client_id;
+	public $status;
+	public $user_id;
 	public $created_at;
 
 	public function __construct($dB) {
@@ -34,7 +36,7 @@ class Lend {
 		}
 	}
 
-	public function getLend() {
+	public function getLends() {
 
 		$sql = 'SELECT * FROM lend ORDER BY id ASC';
 
@@ -78,11 +80,11 @@ class Lend {
 
     	$action = false;
     	if (isset($lend['id'])) {
-			$sql = 'UPDATE lend SET client_id = "'.$lend['client_id'].'", startdate = "'.$lend['start'].'", enddate = "'.$lend['end'].'", user_id = "'.$lend['user_id'].'" WHERE id = '.$lend['id'];
+			$sql = 'UPDATE lend SET reference = "'.$lend['reference'].'", client_id = "'.$lend['client_id'].'", startdate = "'.$lend['start'].'", enddate = "'.$lend['end'].'", status = "'.$lend['status'].'", user_id = "'.$lend['user_id'].'" WHERE id = '.$lend['id'];
     	} else {
 
     		$action = 'redirect';
-			$sql = 'INSERT INTO lend (client_id, startdate, enddate, user_id, created_at) VALUES ("'.$lend['client_id'].'", "'.$lend['startdate'].'", "'.$lend['enddate'].'", "'.$lend['user_id'].'", "'.$lend['created_at'].'", "'.time().'")';
+			$sql = 'INSERT INTO lend (reference, client_id, startdate, enddate, status, user_id, created_at) VALUES ("'.$lend['reference'].'", "'.$lend['client_id'].'", "'.$lend['startdate'].'", "'.$lend['enddate'].'", "'.$lend['status'].'", "'.$lend['user_id'].'", "'.$lend['created_at'].'", "'.time().'")';
     	}
 
 		try {

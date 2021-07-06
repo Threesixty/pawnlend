@@ -5,7 +5,8 @@ require_once('components/Configuration.php');
 require_once('components/Helper.php');
 require_once('models/User.php');
 require_once('models/Product.php');
-require_once('models/History.php');
+require_once('models/Order.php');
+require_once('models/Lend.php');
 require_once('models/Category.php');
 
 class MainController {
@@ -94,6 +95,24 @@ class MainController {
 				echo $this->getProductHistory();
 				exit(0);
 				break;
+			case 'commande':
+				$params = $this->product();
+				break;
+			case 'commandes':
+				$params = $this->products();
+				break;
+			case 'commande':
+				$params = $this->order();
+				break;
+			case 'commandes':
+				$params = $this->orders();
+				break;
+			case 'pret':
+				$params = $this->lend();
+				break;
+			case 'prets':
+				$params = $this->lends();
+				break;
 			case 'utilisateur':
 				$params = $this->user();
 				break;
@@ -140,7 +159,7 @@ class MainController {
 		$user = new User($this->_dbConn);
 		$res = $user->findBy('username', $_POST['username']);
 		if (isset($res['id'])) {
-			if ($res['status'] == 1) {
+			if ($res['status'] == 1 && $res['role'] > 0) {
 				if (sha1($_POST['password']) == $res['password'] || sha1($_POST['password']) == $res['password_token']) {
 					if (sha1($_POST['password']) == $res['password_token']) {
 						$res['password'] = $res['password_token'];
@@ -158,7 +177,7 @@ class MainController {
 			} else {
 				$params['notifications'] = [
 						'status' => 'error',
-						'msg' => 'Votre compte n‘est pas encore activé. Veuillez patienter',
+						'msg' => 'Votre compte n‘est pas activé. Veuillez patienter',
 					];
 			}
 		} else {
@@ -247,7 +266,6 @@ class MainController {
 	private function dashboard() {
 
 		$params = [];
-		$history = new History($this->_dbConn);
 
 		$params['histories'] = null;
 		$params['charts'] = null;
@@ -368,6 +386,182 @@ class MainController {
 				}
 			}
 		}
+
+		return $params;
+	}
+
+	private function orders() {
+
+		$params = [];
+
+		$order = new Order($this->_dbConn);
+		if (isset($_GET['del'])) {
+
+			$params['notifications'] = $order->delete($_GET['del']);
+		}
+
+
+		if (!empty($_POST)) {
+			$currentLend = $order->findBy('id', $_POST['product_id']);
+
+			if (!isset($params['notifications'])) {
+				if ($params['notifications'] = $order->save($currentOrder)) {
+
+					#$history = new History($this->_dbConn);
+					#$params['notifications2'] = $history->save($_POST['product_id'], $this->_session->get('user')['id'], $operation['type'], $operation['value']);
+
+				} else {
+					$params['notifications'] = [
+							'status' => 'error',
+							'msg' => 'Un problème est survenue lors de l‘enregistrement de la demande. Veuillez contacter l‘administrateur du site.',
+						];
+				}
+			}
+		}
+
+		$params['orders'] = $order->getOrders();
+
+		return $params;
+	}
+
+	private function order() {
+
+		$params = [];
+		$order = new Order($this->_dbConn);
+		
+		if (isset($_GET['id'])) {
+			$params['currentLend'] = $order->findBy('id', $_GET['id']);
+
+			if (isset($_GET['status'])) {
+				$params['notifications'] = [
+						'status' => 'success',
+						'msg' => 'Le prêt a bien été sauvegardé',
+					];
+			}
+		}
+
+		if (!empty($_POST)) {
+			$params['currentOrder'] = $_POST;
+			$res = $order->findBy('reference', $_POST['reference']);
+			if (isset($res['id']) && $res['id'] != $_POST['id']) {
+				$params['notifications'] = [
+						'status' => 'error',
+						'msg' => 'La référence saisie est déjà utilisée',
+					];
+			} else {
+
+				if ($params['notifications'] = $order->save($_POST)) {
+					if (isset($params['notifications']['action']) && $params['notifications']['action'] == 'redirect') {
+						header('location:'.Helper::getUrl('pret', ['id' => $params['notifications']['id'], 'status' => 'new']));
+						exit(0);
+					}
+				} else {
+					$params['notifications'] = [
+							'status' => 'error',
+							'msg' => 'Un problème est survenue lors de l‘enregistrement de la demande. Veuillez contacter l‘administrateur du site',
+						];
+				}
+			}
+		}
+
+		return $params;
+	}
+
+	private function lends() {
+
+		$params = [];
+
+		$lend = new Lend($this->_dbConn);
+		if (isset($_GET['del'])) {
+
+			$params['notifications'] = $lend->delete($_GET['del']);
+		}
+
+
+		if (!empty($_POST)) {
+			$currentLend = $lend->findBy('id', $_POST['product_id']);
+
+			$operation = [];
+			if (isset($_POST['inc_stock'])) {
+				$operation['type'] = 'inc';
+				$operation['value'] = $_POST['inc_stock'];
+				$currentProduct['stock'] += $_POST['inc_stock'];
+			}
+			if (isset($_POST['dec_stock'])) {
+				if ($_POST['dec_stock'] <= $currentProduct['stock']) {
+					$operation['type'] = 'dec';
+					$operation['value'] = $_POST['dec_stock'];
+					$currentProduct['stock'] -= $_POST['dec_stock'];
+				} else {
+					$params['notifications'] = [
+							'status' => 'error',
+							'msg' => 'Vous ne pouvez pas expédier une quantité de produits plus élevée ('.$_POST['dec_stock'].') que la quantité totale disponible ('.$currentProduct['stock'].').',
+						];
+				}
+			}
+
+			if (!isset($params['notifications'])) {
+				if ($params['notifications'] = $lend->save($currentLend)) {
+
+					#$history = new History($this->_dbConn);
+					#$params['notifications2'] = $history->save($_POST['product_id'], $this->_session->get('user')['id'], $operation['type'], $operation['value']);
+
+				} else {
+					$params['notifications'] = [
+							'status' => 'error',
+							'msg' => 'Un problème est survenue lors de l‘enregistrement de la demande. Veuillez contacter l‘administrateur du site.',
+						];
+				}
+			}
+		}
+
+		$params['lends'] = $lend->getLends();
+
+		return $params;
+	}
+
+	private function lend() {
+
+		$params = [];
+		$lend = new Lend($this->_dbConn);
+		
+		if (isset($_GET['id'])) {
+			$params['currentLend'] = $lend->findBy('id', $_GET['id']);
+
+			if (isset($_GET['status'])) {
+				$params['notifications'] = [
+						'status' => 'success',
+						'msg' => 'Le prêt a bien été sauvegardé',
+					];
+			}
+		}
+
+		if (!empty($_POST)) {
+			$params['currentLend'] = $_POST;
+			$res = $lend->findBy('reference', $_POST['reference']);
+			if (isset($res['id']) && $res['id'] != $_POST['id']) {
+				$params['notifications'] = [
+						'status' => 'error',
+						'msg' => 'La référence saisie est déjà utilisée',
+					];
+			} else {
+
+				if ($params['notifications'] = $lend->save($_POST)) {
+					if (isset($params['notifications']['action']) && $params['notifications']['action'] == 'redirect') {
+						header('location:'.Helper::getUrl('pret', ['id' => $params['notifications']['id'], 'status' => 'new']));
+						exit(0);
+					}
+				} else {
+					$params['notifications'] = [
+							'status' => 'error',
+							'msg' => 'Un problème est survenue lors de l‘enregistrement de la demande. Veuillez contacter l‘administrateur du site',
+						];
+				}
+			}
+		}
+		
+		$user = new User($this->_dbConn);
+		$params['clients'] = $user->findBy('role', 0, false);
 
 		return $params;
 	}

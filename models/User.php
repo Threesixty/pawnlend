@@ -19,14 +19,14 @@ class User {
 		$this->_conn = $dB;
     }
 
-    public function findBy($key, $value) {
+    public function findBy($key, $value, $one = true) {
 		
 		$sql = 'SELECT * FROM user WHERE '.$key.' = "'.$value.'"';
 
 		try {
 			$res = $this->_conn->query($sql);
 
-			return $res->fetch(PDO::FETCH_ASSOC);
+			return $one ? $res->fetch(PDO::FETCH_ASSOC) : $res->fetchAll(PDO::FETCH_ASSOC);
 
 		} catch(PDOException $e) {
 			return [

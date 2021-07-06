@@ -14,7 +14,7 @@ $title = 'Liste des familles de produit'; ?>
 		<!--begin::Entry-->
 		<div class="d-flex flex-column-fluid">
 			<!--begin::Container-->
-			<div class="container-fluid">
+			<div class="container">
 				<!--begin::Card-->
 				<div class="card card-custom">
 					<div class="card-header flex-wrap py-5">

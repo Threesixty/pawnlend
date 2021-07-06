@@ -2,9 +2,9 @@
 require_once('components/Widget.php');
 require_once('components/Helper.php');
 
-$products = isset($params['products']) ? $params['products'] : null;
+$orders = isset($params['orders']) ? $params['orders'] : null;
 
-$title = 'Liste des produits'; ?>
+$title = 'Liste des commandes'; ?>
 
 	<!--begin::Content-->
 	<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
@@ -23,8 +23,8 @@ $title = 'Liste des produits'; ?>
 						</div>
 						<div class="card-toolbar">
 							<!--begin::Button-->
-							<a href="<?= Helper::getUrl('produit') ?>" class="btn btn-primary font-weight-bolder">
-								<i class="la la-plus"></i> Nouveau produit
+							<a href="<?= Helper::getUrl('pret') ?>" class="btn btn-primary font-weight-bolder">
+								<i class="la la-plus"></i> Nouvelle commande
 							</a>
 							<!--end::Button-->
 						</div>
@@ -33,55 +33,38 @@ $title = 'Liste des produits'; ?>
 
 						<span id="kt_quick_panel_toggle" class="d-none"></span>
 						<!--begin: Datatable-->
-						<table class="table table-separate table-head-custom table-checkable table-responsive" id="kt_datatable_product">
+						<table class="table table-separate table-head-custom table-checkable table-responsive" id="kt_datatable_order">
 							<thead>
 								<tr>
 									<th>ID</th>
-									<th>Nom du produit</th>
-									<th>Référence</th>
-									<th>Catégorie</th>
-									<th>Fournisseur</th>
-									<th>Stock</th>
-									<th>Statut</th>
+									<th>Reference</th>
+									<th>Magasinier</th>
+									<th>Status</th>
 									<th>Date de création</th>
 									<th>Actions</th>
 								</tr>
 							</thead>
 							<tbody>
 								<?php 
-								if (null !== $products) {
-									foreach ($products as $key => $product) {
-										$product = (object) $product;
-										$category = (object) $params['category']->findBy('id', $product->category_id);
+								if (null !== $orders) {
+									foreach ($orders as $key => $order) {
+										$order = (object) $order;
 
-										$stockColor = 'primary';
-										if (intval($product->stock) <= 0)
-											$stockColor = 'danger';
-										elseif ($product->stock <= $product->stock_mini)
-											$stockColor = 'warning'; ?>
+										$orderColor = 'primary'; ?>
 
-										<tr class="<?= $product->status == 0 ? 'bg-dark-o-20' : '' ?>">
-											<td class="m-3">#<?= $product->id ?></td>
-											<td class="product-name"><a href="<?= Helper::getUrl('produit', ['id' => $product->id]) ?>" class="font-weight-bolder"><?= $product->name ?></a></td>
-											<td class="barcode" style="white-space: nowrap;">
-												<?= $product->reference ?>
-												<?php
-												if (intval(phpversion()) >= 7) { ?>
-													<a href="javascript:void(0)" class="ml-1 show-barcode" data-img="data:image/png;base64,<?= Helper::getBarcodeImg($product->reference) ?>"><i class="fa fa-eye"></i></a>
-												<?php } ?>
-											</td>
-											<td><?= $category->name ?></td>
-											<td><?= $product->supplier ?></td>
-											<td><span class="label label-xl font-weight-boldest label-light-<?= $stockColor ?> label-inline"><?= $product->stock > 0 ? $product->stock : 'Rupture' ?></span></td>
-											<td><span class="label label-lg font-weight-bold label-light-<?= $product->status == 1 ? 'success' : 'danger' ?> label-inline"><?= $product->status == 1 ? 'Actif' : 'Désactivé' ?></span></td>
-											<td data-order="<?= $product->created_at ?>"><?= strftime('%e %B %Y', $product->created_at) ?></td>
+										<tr class="<?= $order->status == 0 ? 'bg-dark-o-20' : '' ?>">
+											<td class="m-3">#<?= $order->id ?></td>
+											<td class="product-name"><a href="<?= Helper::getUrl('pret', ['id' => $order->id]) ?>" class="font-weight-bolder"><?= $order->reference ?></a></td>
+											<td><?= $lend->user_id ?></td>
+											<td><span class="label label-lg font-weight-bold label-light-<?= $order->status == 1 ? 'success' : 'danger' ?> label-inline"><?= $order->status == 1 ? 'Actif' : 'Désactivé' ?></span></td>
+											<td data-order="<?= $order->created_at ?>"><?= strftime('%e %B %Y', $order->created_at) ?></td>
 											<td nowrap="nowrap">
 												<div class="dropdown dropdown-inline" data-toggle="tooltip" data-theme="dark" data-placement="left" title="Actions sur le stock">
 													<a href="javascript:;" class="btn btn-sm btn-clean btn-icon" data-toggle="dropdown">
 						                                <i class="fas fa-shipping-fast"></i>
 						                            </a>
 												  	<div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
-														<ul class="nav nav-hoverable flex-column history-parent" data-id="<?= $product->id ?>" data-url="<?= Helper::getUrl('historiqueProduit') ?>">
+														<ul class="nav nav-hoverable flex-column history-parent" data-id="<?= $order->id ?>" data-url="<?= Helper::getUrl('historiqueProduit') ?>">
 
 															<?php
 															if ($user['role'] == 1 || $user['role'] == 3) { ?>
@@ -113,10 +96,10 @@ $title = 'Liste des produits'; ?>
 														</ul>
 												  	</div>
 												</div>
-												<a href="<?= Helper::getUrl('produit', ['id' => $product->id]) ?>" class="btn btn-sm btn-clean btn-icon" data-toggle="tooltip" data-theme="dark" title="Éditer">
+												<a href="<?= Helper::getUrl('commande', ['id' => $order->id]) ?>" class="btn btn-sm btn-clean btn-icon" data-toggle="tooltip" data-theme="dark" title="Éditer">
 													<i class="icon-xl la la-edit"></i>
 												</a>
-												<a href="<?= Helper::getUrl('produits', ['del' => $product->id]) ?>" class="btn btn-sm btn-clean btn-icon" data-toggle="tooltip" data-theme="dark" data-placement="right" title="Supprimer">
+												<a href="<?= Helper::getUrl('commandes', ['del' => $order->id]) ?>" class="btn btn-sm btn-clean btn-icon" data-toggle="tooltip" data-theme="dark" data-placement="right" title="Supprimer">
 													<i class="icon-xl la la-trash"></i>
 												</a>
 											</td>

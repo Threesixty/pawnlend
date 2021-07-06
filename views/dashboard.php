@@ -14,7 +14,7 @@ $title = 'Tableau de bord'; ?>
 		<!--begin::Entry-->
 		<div class="d-flex flex-column-fluid">
 			<!--begin::Container-->
-			<div class="container-fluid">
+			<div class="container">
 				<!--begin::Dashboard-->
 				<!--begin::Row-->
 				<div class="row">

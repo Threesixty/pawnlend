@@ -61,6 +61,26 @@ $config = [
 			'view' => '',
 			'auth' => true,
 		],
+		'prets' => [
+			'layout' => true,
+			'view' => 'lends',
+			'auth' => true,
+		],
+		'pret' => [
+			'layout' => true,
+			'view' => 'lend',
+			'auth' => true,
+		],
+		'commandes' => [
+			'layout' => true,
+			'view' => 'orders',
+			'auth' => true,
+		],
+		'commande' => [
+			'layout' => true,
+			'view' => 'order',
+			'auth' => true,
+		],
 		'utilisateurs' => [
 			'layout' => true,
 			'view' => 'users',

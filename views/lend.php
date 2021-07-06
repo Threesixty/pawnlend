@@ -2,10 +2,10 @@
 require_once('components/Widget.php');
 require_once('components/Helper.php');
 
-$currentProduct = isset($params['currentProduct']) ? $params['currentProduct'] : null;
-$categories = isset($params['categories']) ? $params['categories'] : [];
+$currentLend = isset($params['currentLend']) ? $params['currentLend'] : null;
+$clients = isset($params['clients']) ? $params['clients'] : null;
 
-$title = 'Ajouter un produit'; ?>
+$title = 'Ajouter un prêt'; ?>
 
 	<!--begin::Content-->
 	<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
@@ -24,24 +24,24 @@ $title = 'Ajouter un produit'; ?>
 						</div>
 					</div>
 					<div class="card-body p-0">
-						<div class="wizard wizard-1" id="kt_products_add" data-wizard-state="step-first" data-wizard-clickable="true">
+						<div class="wizard wizard-1" id="kt_lends_add" data-wizard-state="step-first" data-wizard-clickable="true">
 							<!--begin::Wizard Nav-->
 							<div class="wizard-nav border-bottom">
 								<div class="wizard-steps p-8 p-lg-10">
 									<div class="wizard-step" data-wizard-type="step" data-wizard-state="current">
 										<div class="wizard-label">
 											<span class="svg-icon svg-icon-4x wizard-icon">
-												<!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Chat-check.svg-->
+												<!--begin::Svg Icon | path:assets/media/svg/icons/Devices/Display1.svg-->
 												<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
 													<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
 														<rect x="0" y="0" width="24" height="24" />
-														<path d="M4.875,20.75 C4.63541667,20.75 4.39583333,20.6541667 4.20416667,20.4625 L2.2875,18.5458333 C1.90416667,18.1625 1.90416667,17.5875 2.2875,17.2041667 C2.67083333,16.8208333 3.29375,16.8208333 3.62916667,17.2041667 L4.875,18.45 L8.0375,15.2875 C8.42083333,14.9041667 8.99583333,14.9041667 9.37916667,15.2875 C9.7625,15.6708333 9.7625,16.2458333 9.37916667,16.6291667 L5.54583333,20.4625 C5.35416667,20.6541667 5.11458333,20.75 4.875,20.75 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" />
-														<path d="M2,11.8650466 L2,6 C2,4.34314575 3.34314575,3 5,3 L19,3 C20.6568542,3 22,4.34314575 22,6 L22,15 C22,15.0032706 21.9999948,15.0065399 21.9999843,15.009808 L22.0249378,15 L22.0249378,19.5857864 C22.0249378,20.1380712 21.5772226,20.5857864 21.0249378,20.5857864 C20.7597213,20.5857864 20.5053674,20.4804296 20.317831,20.2928932 L18.0249378,18 L12.9835977,18 C12.7263047,14.0909841 9.47412135,11 5.5,11 C4.23590829,11 3.04485894,11.3127315 2,11.8650466 Z M6,7 C5.44771525,7 5,7.44771525 5,8 C5,8.55228475 5.44771525,9 6,9 L15,9 C15.5522847,9 16,8.55228475 16,8 C16,7.44771525 15.5522847,7 15,7 L6,7 Z" fill="#000000" />
+														<path d="M11,20 L11,17 C11,16.4477153 11.4477153,16 12,16 C12.5522847,16 13,16.4477153 13,17 L13,20 L15.5,20 C15.7761424,20 16,20.2238576 16,20.5 C16,20.7761424 15.7761424,21 15.5,21 L8.5,21 C8.22385763,21 8,20.7761424 8,20.5 C8,20.2238576 8.22385763,20 8.5,20 L11,20 Z" fill="#000000" opacity="0.3" />
+														<path d="M3,5 L21,5 C21.5522847,5 22,5.44771525 22,6 L22,16 C22,16.5522847 21.5522847,17 21,17 L3,17 C2.44771525,17 2,16.5522847 2,16 L2,6 C2,5.44771525 2.44771525,5 3,5 Z M4.5,8 C4.22385763,8 4,8.22385763 4,8.5 C4,8.77614237 4.22385763,9 4.5,9 L13.5,9 C13.7761424,9 14,8.77614237 14,8.5 C14,8.22385763 13.7761424,8 13.5,8 L4.5,8 Z M4.5,10 C4.22385763,10 4,10.2238576 4,10.5 C4,10.7761424 4.22385763,11 4.5,11 L7.5,11 C7.77614237,11 8,10.7761424 8,10.5 C8,10.2238576 7.77614237,10 7.5,10 L4.5,10 Z" fill="#000000" />
 													</g>
 												</svg>
 												<!--end::Svg Icon-->
 											</span>
-											<h3 class="wizard-title"><span class="label label-lg mr-2">1</span>Désignation</h3>
+											<h3 class="wizard-title"><span class="label label-lg mr-2">1</span>Identification</h3>
 										</div>
 										<span class="svg-icon svg-icon-xl wizard-arrow">
 											<!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Arrow-right.svg-->
@@ -58,17 +58,17 @@ $title = 'Ajouter un produit'; ?>
 									<div class="wizard-step" data-wizard-type="step">
 										<div class="wizard-label">
 											<span class="svg-icon svg-icon-4x wizard-icon">
-												<!--begin::Svg Icon | path:assets/media/svg/icons/Devices/Display1.svg-->
+												<!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Chat-check.svg-->
 												<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
 													<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
 														<rect x="0" y="0" width="24" height="24" />
-														<path d="M11,20 L11,17 C11,16.4477153 11.4477153,16 12,16 C12.5522847,16 13,16.4477153 13,17 L13,20 L15.5,20 C15.7761424,20 16,20.2238576 16,20.5 C16,20.7761424 15.7761424,21 15.5,21 L8.5,21 C8.22385763,21 8,20.7761424 8,20.5 C8,20.2238576 8.22385763,20 8.5,20 L11,20 Z" fill="#000000" opacity="0.3" />
-														<path d="M3,5 L21,5 C21.5522847,5 22,5.44771525 22,6 L22,16 C22,16.5522847 21.5522847,17 21,17 L3,17 C2.44771525,17 2,16.5522847 2,16 L2,6 C2,5.44771525 2.44771525,5 3,5 Z M4.5,8 C4.22385763,8 4,8.22385763 4,8.5 C4,8.77614237 4.22385763,9 4.5,9 L13.5,9 C13.7761424,9 14,8.77614237 14,8.5 C14,8.22385763 13.7761424,8 13.5,8 L4.5,8 Z M4.5,10 C4.22385763,10 4,10.2238576 4,10.5 C4,10.7761424 4.22385763,11 4.5,11 L7.5,11 C7.77614237,11 8,10.7761424 8,10.5 C8,10.2238576 7.77614237,10 7.5,10 L4.5,10 Z" fill="#000000" />
+														<path d="M4.875,20.75 C4.63541667,20.75 4.39583333,20.6541667 4.20416667,20.4625 L2.2875,18.5458333 C1.90416667,18.1625 1.90416667,17.5875 2.2875,17.2041667 C2.67083333,16.8208333 3.29375,16.8208333 3.62916667,17.2041667 L4.875,18.45 L8.0375,15.2875 C8.42083333,14.9041667 8.99583333,14.9041667 9.37916667,15.2875 C9.7625,15.6708333 9.7625,16.2458333 9.37916667,16.6291667 L5.54583333,20.4625 C5.35416667,20.6541667 5.11458333,20.75 4.875,20.75 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" />
+														<path d="M2,11.8650466 L2,6 C2,4.34314575 3.34314575,3 5,3 L19,3 C20.6568542,3 22,4.34314575 22,6 L22,15 C22,15.0032706 21.9999948,15.0065399 21.9999843,15.009808 L22.0249378,15 L22.0249378,19.5857864 C22.0249378,20.1380712 21.5772226,20.5857864 21.0249378,20.5857864 C20.7597213,20.5857864 20.5053674,20.4804296 20.317831,20.2928932 L18.0249378,18 L12.9835977,18 C12.7263047,14.0909841 9.47412135,11 5.5,11 C4.23590829,11 3.04485894,11.3127315 2,11.8650466 Z M6,7 C5.44771525,7 5,7.44771525 5,8 C5,8.55228475 5.44771525,9 6,9 L15,9 C15.5522847,9 16,8.55228475 16,8 C16,7.44771525 15.5522847,7 15,7 L6,7 Z" fill="#000000" />
 													</g>
 												</svg>
 												<!--end::Svg Icon-->
 											</span>
-											<h3 class="wizard-title"><span class="label label-lg mr-2">2</span>Identification</h3>
+											<h3 class="wizard-title"><span class="label label-lg mr-2">2</span>Durée du prêt</h3>
 										</div>
 										<span class="svg-icon svg-icon-xl wizard-arrow">
 											<!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Arrow-right.svg-->
@@ -95,7 +95,7 @@ $title = 'Ajouter un produit'; ?>
 												</svg>
 												<!--end::Svg Icon-->
 											</span>
-											<h3 class="wizard-title"><span class="label label-lg mr-2">3</span>Stock</h3>
+											<h3 class="wizard-title"><span class="label label-lg mr-2">3</span>Produits</h3>
 										</div>
 										<span class="svg-icon svg-icon-xl wizard-arrow">
 											<!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Arrow-right.svg-->
@@ -149,48 +149,34 @@ $title = 'Ajouter un produit'; ?>
 							<div class="row justify-content-center my-10 px-8 my-lg-15 px-lg-10">
 								<div class="col-xl-12 col-xxl-7">
 									<!--begin::Form Wizard-->
-									<form class="form" id="kt_products_add_form" method="post" enctype="multipart/form-data">
+									<form class="form" id="kt_lends_add_form" method="post" enctype="multipart/form-data">
 										<?php
 										if (isset($_GET['id'])) { ?>
 											<input type="hidden" name="id" value="<?= $_GET['id'] ?>">
 										<?php } ?>
-										<input type="hidden" name="status" value="<?= isset($currentProduct['status']) ? $currentProduct['status'] : 0 ?>">
+										<input type="hidden" name="status" value="<?= isset($currentLend['status']) ? $currentLend['status'] : 0 ?>">
 
 										<!--begin::Step 1-->
 										<div class="pb-5" data-wizard-type="step-content" data-wizard-state="current">
-											<h3 class="mb-10 font-weight-bold text-dark text-uppercase">Désignation :</h3>
+											<h3 class="mb-10 font-weight-bold text-dark text-uppercase">Identification :</h3>
 											<div class="row">
 												<div class="col-xl-12">
 													<div class="form-group row">
-														<label class="col-xl-3 col-lg-3 col-form-label">Nom du produit <sup class="text-danger">*</sup></label>
+														<label class="col-xl-3 col-lg-3 col-form-label">Référence <sup class="text-danger">*</sup></label>
 														<div class="col-lg-9 col-xl-9">
-															<input class="form-control form-control-lg form-control-solid" name="name" type="text" value="<?= isset($currentProduct['name']) ? $currentProduct['name'] : '' ?>" />
+															<input class="form-control form-control-lg form-control-solid" name="reference" type="text" value="<?= isset($currentLend['reference']) ? $currentLend['reference'] : '' ?>" />
 														</div>
 													</div>
 													<div class="form-group row">
-														<label class="col-xl-3 col-lg-3 col-form-label">Description</label>
+														<label class="col-xl-3 col-lg-3 col-form-label">Loueur <sup class="text-danger">*</sup></label>
 														<div class="col-lg-9 col-xl-9">
-															<textarea class="form-control form-control-lg form-control-solid" id="kt_autosize_1" rows="3" name="description"><?= isset($currentProduct['name']) ? $currentProduct['description'] : '' ?></textarea>
-														</div>
-													</div>
-													<div class="form-group row">
-														<label class="col-xl-3 col-lg-3 col-form-label">Photo du produit</label>
-														<div class="col-lg-9 col-xl-9">
-															<?php
-															$photoUrl = 'assets/media/users/blank.png';
-															if (isset($currentProduct['photo']) && null != $currentProduct['photo']) {
-																$photoUrl = 'medias/'.$currentProduct['photo'];
-															} ?>
-															<div class="image-input image-input-empty image-input-outline" id="kt_image_5" style="background-image: url(<?= $photoUrl ?>)">
-																<div class="image-input-wrapper"></div>
-																<label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Modifier la photo">
-																	<i class="fa fa-pen icon-sm text-muted"></i>
-																	<input type="file" name="photo" accept=".png, .jpg, .jpeg" />
-																</label>
-																<span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="cancel" data-toggle="tooltip" title="Supprimer">
-																	<i class="ki ki-bold-close icon-xs text-muted"></i>
-																</span>
-															</div>
+															<select class="form-control form-control-lg form-control-solid" id="kt_select2_1" name="client_id">
+																<option value=""></option>
+																<?php
+																foreach ($clients as $key => $user) { ?>
+																	<option value="<?= $user['id'] ?>" <?= isset($currentLend['client_id']) && $currentLend['client_id'] == $user['id'] ? 'selected' : '' ?>><?= ucwords($user['firstname']).' '.mb_strtoupper($user['lastname']) ?></option>
+																<?php } ?>
+															</select>
 														</div>
 													</div>
 												</div>
@@ -203,31 +189,19 @@ $title = 'Ajouter un produit'; ?>
 												<div class="col-xl-12">
 													<div class="form-group row">
 														<div class="col-lg-9 col-xl-6">
-															<h3 class="mb-10 font-weight-bold text-dark text-uppercase">Identification</h3>
+															<h3 class="mb-10 font-weight-bold text-dark text-uppercase">Durée du prêt</h3>
 														</div>
 													</div>
 													<div class="form-group row">
-														<label class="col-xl-3 col-lg-3 col-form-label">Catégorie <sup class="text-danger">*</sup></label>
+														<label class="col-xl-3 col-lg-3 col-form-label">Date du prêt <sup class="text-danger">*</sup></label>
 														<div class="col-lg-9 col-xl-9">
-															<select class="form-control form-control-lg form-control-solid" id="kt_select2_1" name="category_id">
-																<option value=""></option>
-																<?php
-																foreach ($categories as $key => $category) { ?>
-																	<option value="<?= $category['id'] ?>" <?= isset($currentProduct['category_id']) && $currentProduct['category_id'] == $category['id'] ? 'selected' : '' ?>><?= $category['name'] ?></option>
-																<?php } ?>
-															</select>
+															<input class="form-control form-control-lg form-control-solid" name="supplier" type="text" value="<?= isset($currentLend['supplier']) ? $currentLend['supplier'] : '' ?>" />
 														</div>
 													</div>
 													<div class="form-group row">
-														<label class="col-xl-3 col-lg-3 col-form-label">Référence <sup class="text-danger">*</sup></label>
+														<label class="col-xl-3 col-lg-3 col-form-label">Date de restitution <sup class="text-danger">*</sup></label>
 														<div class="col-lg-9 col-xl-9">
-															<input class="form-control form-control-lg form-control-solid" name="reference" type="text" value="<?= isset($currentProduct['reference']) ? $currentProduct['reference'] : '' ?>" />
-														</div>
-													</div>
-													<div class="form-group row">
-														<label class="col-xl-3 col-lg-3 col-form-label">Fournisseur <sup class="text-danger">*</sup></label>
-														<div class="col-lg-9 col-xl-9">
-															<input class="form-control form-control-lg form-control-solid" name="supplier" type="text" value="<?= isset($currentProduct['supplier']) ? $currentProduct['supplier'] : '' ?>" />
+															<input class="form-control form-control-lg form-control-solid" name="supplier" type="text" value="<?= isset($currentLend['supplier']) ? $currentLend['supplier'] : '' ?>" />
 														</div>
 													</div>
 												</div>
@@ -240,33 +214,27 @@ $title = 'Ajouter un produit'; ?>
 												<div class="col-xl-12">
 													<div class="form-group row">
 														<div class="col-lg-9 col-xl-6">
-															<h3 class="mb-10 font-weight-bold text-dark text-uppercase">Stock</h3>
+															<h3 class="mb-10 font-weight-bold text-dark text-uppercase">Produits</h3>
 														</div>
 													</div>
 													<div class="form-group row">
 														<label class="col-xl-3 col-lg-3 col-form-label">Stock actuel <sup class="text-danger">*</sup></label>
 														<div class="col-lg-9 col-xl-9">
-															<input class="form-control<?= isset($currentProduct['stock']) && $user['role'] < 3 ? '-plaintext' : '' ?> form-control-lg form-control-solid" name="stock" type="text" value="<?= isset($currentProduct['stock']) ? $currentProduct['stock'] : '' ?>" />
-														</div>
-													</div>
-													<div class="form-group row">
-														<label class="col-xl-3 col-lg-3 col-form-label">Alerte stock mini <sup class="text-danger">*</sup></label>
-														<div class="col-lg-9 col-xl-9">
-															<input class="form-control form-control-lg form-control-solid" name="stock_mini" type="text" value="<?= isset($currentProduct['stock_mini']) ? $currentProduct['stock_mini'] : '' ?>" />
+															<input class="form-control<?= isset($currentLend['stock']) && $user['role'] < 3 ? '-plaintext' : '' ?> form-control-lg form-control-solid" name="stock" type="text" value="<?= isset($currentLend['stock']) ? $currentLend['stock'] : '' ?>" />
 														</div>
 													</div>
 													<div class="form-group row">
 														<div class="col-lg-9 col-xl-6">
-															<h3 class="mt-10 mb-10 font-weight-bold text-dark text-uppercase">Statut du produit</h3>
+															<h3 class="mt-10 mb-10 font-weight-bold text-dark text-uppercase">Statut du prêt</h3>
 														</div>
 													</div>
 													<div class="form-group row">
-														<label class="col-xl-3 col-lg-3 col-form-label">Activer le produit ?</label>
+														<label class="col-xl-3 col-lg-3 col-form-label">Activer le prêt ?</label>
 														<div class="col-lg-9 col-xl-9">
 															<span class="switch switch-lg switch-icon">
 																<label>
 																	<input type="hidden" name="status" value="0" />
-																	<input type="checkbox" name="status" value="1" <?= isset($currentProduct['status']) && $currentProduct['status'] == '1' ? 'checked' : '' ?>>
+																	<input type="checkbox" name="status" value="1" <?= isset($currentLend['status']) && $currentLend['status'] == '1' ? 'checked' : '' ?>>
 																	<span></span>
 																</label>
 															</span>
