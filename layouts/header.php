@@ -39,7 +39,8 @@ require_once('components/Helper.php'); ?>
 		<div id="kt_header_mobile" class="header-mobile align-items-center header-mobile-fixed">
 			<!--begin::Logo-->
 			<a href="<?= Helper::getUrl('index') ?>">
-				<span class="logo">{SARII-Stock}</span>
+				<span class="logo">
+										<img alt="Logo" src="assets/media/logos/logo-dark.png"></span>
 			</a>
 			<!--end::Logo-->
 			<!--begin::Toolbar-->
@@ -80,6 +81,11 @@ require_once('components/Helper.php'); ?>
 						<div class="container-fluid d-flex align-items-stretch justify-content-between">
 							<!--begin::Header Menu Wrapper-->
 							<div class="header-menu-wrapper header-menu-wrapper-left" id="kt_header_menu_wrapper">
+								<div class="header-logo">
+									<a href="index.html">
+										<img alt="Logo" src="assets/media/logos/logo-dark.png">
+									</a>
+								</div>
 								<!--begin::Header Menu-->
 								<div id="kt_header_menu" class="header-menu header-menu-mobile header-menu-layout-default">
 									<!--begin::Header Nav-->
