@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost
--- Généré le :  mar. 06 juil. 2021 à 19:28
+-- Généré le :  mar. 06 juil. 2021 à 20:02
 -- Version du serveur :  10.1.37-MariaDB
 -- Version de PHP :  7.2.13
 
@@ -73,8 +73,8 @@ CREATE TABLE `lend` (
 CREATE TABLE `lend_product` (
   `id` int(11) NOT NULL,
   `lend_id` int(11) NOT NULL,
-  `product_lot_id` int(11) NOT NULL,
-  `product_id` int(11) NOT NULL,
+  `type` enum('lot','product') COLLATE utf8_unicode_ci NOT NULL,
+  `type_id` int(11) NOT NULL,
   `quantity` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
