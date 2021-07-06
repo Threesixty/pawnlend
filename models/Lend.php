@@ -89,7 +89,7 @@ class Lend {
 			$deleteLendProducts = $lendProduct->deleteLendProducts($lend['id']);
     	} else {
     		$action = 'redirect';
-			$sql = 'INSERT INTO lend (reference, client_id, startdate, enddate, status, user_id, created_at) VALUES ("'.$lend['reference'].'", "'.$lend['client_id'].'", "'.$lend['startdate'].'", "'.$lend['enddate'].'", "'.$lend['status'].'", "'.$lend['user_id'].'", "'.$lend['created_at'].'", "'.time().'")';
+			$sql = 'INSERT INTO lend (reference, client_id, startdate, enddate, status, user_id, created_at) VALUES ("'.$lend['reference'].'", "'.$lend['client_id'].'", "'.$lend['startdate'].'", "'.$lend['enddate'].'", "'.$lend['status'].'", "'.$lend['user_id'].'", "'.time().'")';
     	}
 
 		try {

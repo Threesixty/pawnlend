@@ -53,7 +53,7 @@
 				<!--end::Separator-->
 
 				<div class="navi navi-icon-circle navi-spacer-x-0">
-					<h4 class="font-weight-bold my-2">Historique des mouvements</h4>
+					<h4 class="font-weight-bold my-2">En cours...</h4>
 					<?php
 					if (!empty($currentUserHistories)) {
 						foreach ($currentUserHistories as $userHistory) {

@@ -200,16 +200,19 @@ var KTLendsAdd = function () {
 			}
 
 			if (wizard.getStep() != 4) {
-				$('.product-name').html($('input[name="name"]').val());
-				$('.product-description').html($('textarea[name="description"]').val());
-				$('.product-category').html($('select[name="category_id"] option:selected').text());
-				$('.product-reference').html($('input[name="reference"]').val());
-				$('.product-stock').html($('input[name="stock"]').val());
-				$('.product-stock-mini').html($('input[name="stock_mini"]').val());
+				$('.lend-reference').html($('input[name="reference"]').val());
+				$('.lend-client').html($('select[name="client_id"] option:selected').text());
+				$('.lend-start').html($('input[name="startdate"]').val());
+				$('.lend-end').html($('input[name="enddate"]').val());
+				var productList = '';
+				$('select[name="products"] option:selected').each(function() {
+					if (productList != '')
+						productList += '<br>'
+					productList += $(this).text();
+				});
+				$('.lend-products').html(productList);
 				var status = $('input[name="status"]').is(':checked') ? 'Oui' : 'Non';
 				$('.product-status').html(status);
-				var url = $('.image-input-wrapper').attr('style') != undefined && $('.image-input-wrapper').attr('style') != 'background-image: none;' ? $('.image-input-wrapper').attr('style') : $('#kt_image_5').attr('style');
-				$('.product-photo span').attr('style', url);
 			}
 
 			// Validate form before change wizard step

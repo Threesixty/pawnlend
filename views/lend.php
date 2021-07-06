@@ -269,42 +269,32 @@ $title = 'Ajouter un prêt'; ?>
 											<h6 class="font-weight-bold text-uppercase mb-3">Identification :</h6>
 											<table class="w-100">
 												<tr>
-													<td class="font-weight-bold text-muted">Nom du produit :</td>
-													<td class="font-weight-bold text-right product-name"></td>
-												</tr>
-												<tr>
-													<td class="font-weight-bold text-muted">Description :</td>
-													<td class="font-weight-bold text-right product-description"></td>
-												</tr>
-												<tr>
-													<td class="font-weight-bold text-muted">Photo produit :</td>
-													<td class="font-weight-bold text-right product-photo">
-														<span></span>
-													</td>
-												</tr>
-											</table>
-											<div class="separator separator-dashed my-5"></div>
-											<h6 class="font-weight-bold text-uppercase mb-3">Identification :</h6>
-											<table class="w-100">
-												<tr>
-													<td class="font-weight-bold text-muted">Catégorie :</td>
-													<td class="font-weight-bold text-right product-category"></td>
-												</tr>
-												<tr>
 													<td class="font-weight-bold text-muted">Référence :</td>
-													<td class="font-weight-bold text-right product-reference"></td>
+													<td class="font-weight-bold text-right lend-reference"></td>
+												</tr>
+												<tr>
+													<td class="font-weight-bold text-muted">Loueur :</td>
+													<td class="font-weight-bold text-right lend-client"></td>
 												</tr>
 											</table>
 											<div class="separator separator-dashed my-5"></div>
-											<h6 class="font-weight-bold text-uppercase mb-3">Stock :</h6>
+											<h6 class="font-weight-bold text-uppercase mb-3">Durée du prêt :</h6>
 											<table class="w-100">
 												<tr>
-													<td class="font-weight-bold text-muted">Stock actuel :</td>
-													<td class="font-weight-bold text-right product-stock"></td>
+													<td class="font-weight-bold text-muted">Date de prêt :</td>
+													<td class="font-weight-bold text-right lend-start"></td>
 												</tr>
 												<tr>
-													<td class="font-weight-bold text-muted">Alerte stock mini :</td>
-													<td class="font-weight-bold text-right product-stock-mini"></td>
+													<td class="font-weight-bold text-muted">Date de restitution programmée :</td>
+													<td class="font-weight-bold text-right lend-end"></td>
+												</tr>
+											</table>
+											<div class="separator separator-dashed my-5"></div>
+											<h6 class="font-weight-bold text-uppercase mb-3">Produits :</h6>
+											<table class="w-100">
+												<tr>
+													<td class="font-weight-bold text-muted">Liste :</td>
+													<td class="font-weight-bold text-right lend-products"></td>
 												</tr>
 											</table>
 											<h6 class="font-weight-bold text-uppercase my-3">Statut du produit :</h6>
