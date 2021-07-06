@@ -97,7 +97,9 @@ var KTDualListbox = function () {
         // public functions
         init: function () {
             //demo1();
-            demo2();
+            if ($('#kt_dual_listbox_2').length) {
+            	demo2();
+            }
             //demo3();
             //demo4();
         },

@@ -78,18 +78,20 @@ class Lend {
 	}
 
     public function save($lend) {
-
+    	
+        $this->_session = new Session();
+		$user = $this->_session->get('user');
 
 		$lendProduct = new LendProduct($this->_conn);
 
     	$action = false;
     	if (isset($lend['id'])) {
-			$sql = 'UPDATE lend SET reference = "'.$lend['reference'].'", client_id = "'.$lend['client_id'].'", startdate = "'.$lend['start'].'", enddate = "'.$lend['end'].'", status = "'.$lend['status'].'", user_id = "'.$lend['user_id'].'" WHERE id = '.$lend['id'];
+			$sql = 'UPDATE lend SET reference = "'.$lend['reference'].'", client_id = "'.$lend['client_id'].'", startdate = "'.$lend['start'].'", enddate = "'.$lend['end'].'", status = "'.$lend['status'].'", user_id = "'.$user['id'].'" WHERE id = '.$lend['id'];
 
 			$deleteLendProducts = $lendProduct->deleteLendProducts($lend['id']);
     	} else {
     		$action = 'redirect';
-			$sql = 'INSERT INTO lend (reference, client_id, startdate, enddate, status, user_id, created_at) VALUES ("'.$lend['reference'].'", "'.$lend['client_id'].'", "'.$lend['startdate'].'", "'.$lend['enddate'].'", "'.$lend['status'].'", "'.$lend['user_id'].'", "'.time().'")';
+			$sql = 'INSERT INTO lend (reference, client_id, startdate, enddate, status, user_id, created_at) VALUES ("'.$lend['reference'].'", "'.$lend['client_id'].'", "'.$lend['startdate'].'", "'.$lend['enddate'].'", "'.$lend['status'].'", "'.$user['id'].'", "'.time().'")';
     	}
 
 		try {

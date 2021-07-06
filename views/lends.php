@@ -59,8 +59,8 @@ $title = 'Liste des prêts'; ?>
 											<td class="m-3">#<?= $lend->id ?></td>
 											<td class="product-name"><a href="<?= Helper::getUrl('pret', ['id' => $lend->id]) ?>" class="font-weight-bolder"><?= $lend->reference ?></a></td>
 											<td><?= $lend->client_id ?></td>
-											<td><?= strftime('%e %B %Y', $lend->startdate) ?></td>
-											<td><?= strftime('%e %B %Y', $lend->enddate) ?></td>
+											<td><?= $lend->startdate ?></td>
+											<td><?= $lend->enddate ?></td>
 											<td><?= $lend->user_id ?></td>
 											<td><span class="label label-lg font-weight-bold label-light-<?= $lend->status == 1 ? 'success' : 'danger' ?> label-inline"><?= $lend->status == 1 ? 'Actif' : 'Désactivé' ?></span></td>
 											<td data-order="<?= $lend->created_at ?>"><?= strftime('%e %B %Y', $lend->created_at) ?></td>
