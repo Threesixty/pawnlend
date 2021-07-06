@@ -229,6 +229,8 @@
 		<script src="assets/js/pages/crud/forms/widgets/select2.js"></script>
 		<script src="assets/js/pages/features/charts/apexcharts.js"></script>
 		<script src="assets/js/pages/crud/file-upload/image-input.js"></script>
+		<script src="assets/js/pages/crud/forms/widgets/bootstrap-datepicker.js"></script>
+		<script src="assets/js/pages/features/miscellaneous/dual-listbox.js"></script>
 	</body>
 	<!--end::Body-->
 </html>

@@ -290,17 +290,17 @@ var KTLendsAdd = function () {
 			{
 				fields: {
 					// Step 2
-					category_id: {
+					startdate: {
 						validators: {
 							notEmpty: {
-								message: 'Veuillez sélectionner la catégorie du produit'
+								message: 'Veuillez sélectionner une date de prêt'
 							}
 						}
 					},
-					reference: {
+					enddate: {
 						validators: {
 							notEmpty: {
-								message: 'Une référence produit est requise'
+								message: 'Veuillez sélectionner une date de restitution'
 							}
 						}
 					},

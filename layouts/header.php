@@ -83,7 +83,7 @@ require_once('components/Helper.php'); ?>
 							<!--begin::Header Menu Wrapper-->
 							<div class="header-menu-wrapper header-menu-wrapper-left" id="kt_header_menu_wrapper">
 								<div class="header-logo">
-									<a href="index.html">
+									<a href="<?= Helper::getUrl('index') ?>">
 										<img alt="Logo" src="assets/media/logos/logo-dark.png">
 									</a>
 								</div>

@@ -95,12 +95,25 @@ var KTBootstrapDatepicker = function () {
             todayHighlight: true,
             templates: arrows
         });
+        $.fn.datepicker.dates['fr'] = {
+		    days: ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"],
+		    daysShort: ["Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"],
+		    daysMin: ["Di", "Lu", "Ma", "Me", "Je", "Ve", "Sa"],
+		    months: ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Decembre"],
+		    monthsShort: ["Jan", "Fev", "Mar", "Avr", "Mai", "Jui", "Juil", "Aou", "Sep", "Oct", "Nov", "Dec"],
+		    today: "Aujourd'hui",
+		    clear: "Effacer",
+		    titleFormat: "MM yyyy", /* Leverages same syntax as 'format' */
+		    weekStart: 0
+		};
 
         // range picker
         $('#kt_datepicker_5').datepicker({
             rtl: KTUtil.isRTL(),
             todayHighlight: true,
-            templates: arrows
+            templates: arrows,
+            format: 'dd/mm/yyyy',
+            language: 'fr',
         });
 
          // inline picker

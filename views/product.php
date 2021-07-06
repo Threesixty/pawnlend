@@ -164,20 +164,20 @@ $title = 'Ajouter un produit'; ?>
 													<div class="form-group row">
 														<label class="col-xl-3 col-lg-3 col-form-label">Nom du produit <sup class="text-danger">*</sup></label>
 														<div class="col-lg-9 col-xl-9">
-															<input class="form-control form-control-lg form-control-solid" name="name" type="text" value="<?= isset($currentProduct['name']) ? $currentProduct['name'] : '' ?>" />
+															<input class="form-control form-control-lg" name="name" type="text" value="<?= isset($currentProduct['name']) ? $currentProduct['name'] : '' ?>" />
 														</div>
 													</div>
 													<div class="form-group row">
 														<label class="col-xl-3 col-lg-3 col-form-label">Description</label>
 														<div class="col-lg-9 col-xl-9">
-															<textarea class="form-control form-control-lg form-control-solid" id="kt_autosize_1" rows="3" name="description"><?= isset($currentProduct['name']) ? $currentProduct['description'] : '' ?></textarea>
+															<textarea class="form-control form-control-lg" id="kt_autosize_1" rows="3" name="description"><?= isset($currentProduct['name']) ? $currentProduct['description'] : '' ?></textarea>
 														</div>
 													</div>
 													<div class="form-group row">
 														<label class="col-xl-3 col-lg-3 col-form-label">Photo du produit</label>
 														<div class="col-lg-9 col-xl-9">
 															<?php
-															$photoUrl = 'assets/media/users/blank.png';
+															$photoUrl = 'assets/media/products/blank.png';
 															if (isset($currentProduct['photo']) && null != $currentProduct['photo']) {
 																$photoUrl = 'medias/'.$currentProduct['photo'];
 															} ?>
@@ -209,7 +209,7 @@ $title = 'Ajouter un produit'; ?>
 													<div class="form-group row">
 														<label class="col-xl-3 col-lg-3 col-form-label">Catégorie <sup class="text-danger">*</sup></label>
 														<div class="col-lg-9 col-xl-9">
-															<select class="form-control form-control-lg form-control-solid" id="kt_select2_1" name="category_id">
+															<select class="form-control form-control-lg" id="kt_select2_1" name="category_id">
 																<option value=""></option>
 																<?php
 																foreach ($categories as $key => $category) { ?>
@@ -221,13 +221,13 @@ $title = 'Ajouter un produit'; ?>
 													<div class="form-group row">
 														<label class="col-xl-3 col-lg-3 col-form-label">Référence <sup class="text-danger">*</sup></label>
 														<div class="col-lg-9 col-xl-9">
-															<input class="form-control form-control-lg form-control-solid" name="reference" type="text" value="<?= isset($currentProduct['reference']) ? $currentProduct['reference'] : '' ?>" />
+															<input class="form-control form-control-lg" name="reference" type="text" value="<?= isset($currentProduct['reference']) ? $currentProduct['reference'] : '' ?>" />
 														</div>
 													</div>
 													<div class="form-group row">
 														<label class="col-xl-3 col-lg-3 col-form-label">Fournisseur <sup class="text-danger">*</sup></label>
 														<div class="col-lg-9 col-xl-9">
-															<input class="form-control form-control-lg form-control-solid" name="supplier" type="text" value="<?= isset($currentProduct['supplier']) ? $currentProduct['supplier'] : '' ?>" />
+															<input class="form-control form-control-lg" name="supplier" type="text" value="<?= isset($currentProduct['supplier']) ? $currentProduct['supplier'] : '' ?>" />
 														</div>
 													</div>
 												</div>
@@ -246,13 +246,13 @@ $title = 'Ajouter un produit'; ?>
 													<div class="form-group row">
 														<label class="col-xl-3 col-lg-3 col-form-label">Stock actuel <sup class="text-danger">*</sup></label>
 														<div class="col-lg-9 col-xl-9">
-															<input class="form-control<?= isset($currentProduct['stock']) && $user['role'] < 3 ? '-plaintext' : '' ?> form-control-lg form-control-solid" name="stock" type="text" value="<?= isset($currentProduct['stock']) ? $currentProduct['stock'] : '' ?>" />
+															<input class="form-control<?= isset($currentProduct['stock']) && $user['role'] < 3 ? '-plaintext' : '' ?> form-control-lg" name="stock" type="text" value="<?= isset($currentProduct['stock']) ? $currentProduct['stock'] : '' ?>" />
 														</div>
 													</div>
 													<div class="form-group row">
 														<label class="col-xl-3 col-lg-3 col-form-label">Alerte stock mini <sup class="text-danger">*</sup></label>
 														<div class="col-lg-9 col-xl-9">
-															<input class="form-control form-control-lg form-control-solid" name="stock_mini" type="text" value="<?= isset($currentProduct['stock_mini']) ? $currentProduct['stock_mini'] : '' ?>" />
+															<input class="form-control form-control-lg" name="stock_mini" type="text" value="<?= isset($currentProduct['stock_mini']) ? $currentProduct['stock_mini'] : '' ?>" />
 														</div>
 													</div>
 													<div class="form-group row">

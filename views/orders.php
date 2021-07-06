@@ -23,7 +23,7 @@ $title = 'Liste des commandes'; ?>
 						</div>
 						<div class="card-toolbar">
 							<!--begin::Button-->
-							<a href="<?= Helper::getUrl('pret') ?>" class="btn btn-primary font-weight-bolder">
+							<a href="<?= Helper::getUrl('order') ?>" class="btn btn-primary font-weight-bolder">
 								<i class="la la-plus"></i> Nouvelle commande
 							</a>
 							<!--end::Button-->

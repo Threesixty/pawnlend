@@ -2,15 +2,13 @@
 require_once('components/Helper.php');
 require_once('components/Database.php');
 
-class LendProduct {
+class ProductLotProduct {
 
 	private $_conn;
 
 	public $id;
-	public $lendId;
 	public $product_lot_id;
 	public $product_id;
-	public $quantity;
 
 	public function __construct($dB) {
 		$this->_conn = $dB;
@@ -18,7 +16,7 @@ class LendProduct {
 
     public function findBy($key, $value, $one = true) {
 
-		$sql = 'SELECT * FROM lend_product WHERE '.$key.' = "'.$value.'"';
+		$sql = 'SELECT * FROM product_lot_product WHERE '.$key.' = "'.$value.'"';
 
 		try {
 			$res = $this->_conn->query($sql);
@@ -33,9 +31,9 @@ class LendProduct {
 		}
 	}
 
-	public function getLendProducts() {
+	public function getProductLotProducts() {
 
-		$sql = 'SELECT * FROM lend_product ORDER BY id ASC';
+		$sql = 'SELECT * FROM product_lot_product ORDER BY id ASC';
 
 		try {
 			$res = $this->_conn->query($sql);
@@ -50,9 +48,9 @@ class LendProduct {
 		}
 	}
 
-	public function delete($lendProductId) {
+	public function delete($productLotProductId) {
 
-		$sql = 'DELETE FROM lend_product WHERE id = '.intval($lendProductId);
+		$sql = 'DELETE FROM product_lot_product WHERE id = '.intval($productLotProductId);
 
 		try {
 			$res = $this->_conn->query($sql);
@@ -67,15 +65,15 @@ class LendProduct {
 		}
 	}
 
-    public function save($lendProduct) {
+    public function save($productLotProduct) {
 
     	$action = false;
-    	if (isset($lendProduct['id'])) {
-			$sql = 'UPDATE lend_product SET client_id = "'.$lendProduct['client_id'].'", startdate = "'.$lendProduct['start'].'", enddate = "'.$lendProduct['end'].'", user_id = "'.$lendProduct['user_id'].'" WHERE id = '.$lendProduct['id'];
+    	if (isset($productLotProduct['id'])) {
+			$sql = 'UPDATE lend_product SET product_lot_id = "'.$productLotProduct['product_lot_id'].'", product_id = "'.$productLotProduct['product_id'].'" WHERE id = '.$productLotProduct['id'];
     	} else {
 
     		$action = 'redirect';
-			$sql = 'INSERT INTO lend_product (client_id, startdate, enddate, user_id, created_at) VALUES ("'.$lendProduct['client_id'].'", "'.$lendProduct['startdate'].'", "'.$lendProduct['enddate'].'", "'.$lendProduct['user_id'].'", "'.$lendProduct['created_at'].'", "'.time().'")';
+			$sql = 'INSERT INTO lend_product (product_lot_id, product_id) VALUES ("'.$productLotProduct['product_lot_id'].'", "'.$lendProduct['product_id'].'")';
     	}
 
 		try {

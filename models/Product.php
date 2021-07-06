@@ -97,7 +97,8 @@ class Product {
     	} else {
 
     		$action = 'redirect';
-			$sql = 'INSERT INTO product (name, description, photo, reference, category_id, stock, stock_mini, status, created_at) VALUES ("'.$product['name'].'", "'.$product['description'].'", "'.$filename.'", "'.$product['reference'].'", "'.$product['supplier'].'", "'.$product['category_id'].'", "'.$product['stock'].'", "'.$product['stock_mini'].'", '.$product['status'].', "'.time().'")';
+			$sql = 'INSERT INTO product (name, description, photo, reference, supplier, category_id, stock, stock_mini, status, created_at) VALUES ("'.$product['name'].'", "'.$product['description'].'", "'.$cleanFilename.'", "'.$product['reference'].'", "'.$product['supplier'].'", "'.$product['category_id'].'", "'.$product['stock'].'", "'.$product['stock_mini'].'", '.$product['status'].', "'.time().'")';
+			Helper::pp($sql);
     	}
 
 		try {

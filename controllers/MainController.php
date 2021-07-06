@@ -5,8 +5,12 @@ require_once('components/Configuration.php');
 require_once('components/Helper.php');
 require_once('models/User.php');
 require_once('models/Product.php');
+require_once('models/ProductLot.php');
+require_once('models/ProductLotProduct.php');
 require_once('models/Order.php');
+require_once('models/OrderProduct.php');
 require_once('models/Lend.php');
+require_once('models/LendProduct.php');
 require_once('models/Category.php');
 
 class MainController {
@@ -528,6 +532,9 @@ class MainController {
 		if (isset($_GET['id'])) {
 			$params['currentLend'] = $lend->findBy('id', $_GET['id']);
 
+			$productLotProduct = new ProductLotProduct($this->_dbConn);
+			$params['currentLendProducts'] = $productLotProduct->findBy('lendId', $_GET['id']);
+
 			if (isset($_GET['status'])) {
 				$params['notifications'] = [
 						'status' => 'success',
@@ -562,6 +569,11 @@ class MainController {
 		
 		$user = new User($this->_dbConn);
 		$params['clients'] = $user->findBy('role', 0, false);
+
+		$product = new Product($this->_dbConn);
+		$params['products'] = $product->getProducts();
+		$productLot = new ProductLot($this->_dbConn);
+		$params['productLots'] = $productLot->getProductLots();
 
 		return $params;
 	}

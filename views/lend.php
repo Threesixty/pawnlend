@@ -3,7 +3,11 @@ require_once('components/Widget.php');
 require_once('components/Helper.php');
 
 $currentLend = isset($params['currentLend']) ? $params['currentLend'] : null;
+$currentLendProducts = isset($params['currentLendProducts']) ? $params['currentLendProducts'] : null;
+
 $clients = isset($params['clients']) ? $params['clients'] : null;
+$products = isset($params['products']) ? $params['products'] : null;
+$productLots = isset($params['productLots']) ? $params['productLots'] : null;
 
 $title = 'Ajouter un prêt'; ?>
 
@@ -58,14 +62,15 @@ $title = 'Ajouter un prêt'; ?>
 									<div class="wizard-step" data-wizard-type="step">
 										<div class="wizard-label">
 											<span class="svg-icon svg-icon-4x wizard-icon">
-												<!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Chat-check.svg-->
+												<!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo1\dist/../src/media/svg/icons\Home\Clock.svg-->
 												<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-													<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-														<rect x="0" y="0" width="24" height="24" />
-														<path d="M4.875,20.75 C4.63541667,20.75 4.39583333,20.6541667 4.20416667,20.4625 L2.2875,18.5458333 C1.90416667,18.1625 1.90416667,17.5875 2.2875,17.2041667 C2.67083333,16.8208333 3.29375,16.8208333 3.62916667,17.2041667 L4.875,18.45 L8.0375,15.2875 C8.42083333,14.9041667 8.99583333,14.9041667 9.37916667,15.2875 C9.7625,15.6708333 9.7625,16.2458333 9.37916667,16.6291667 L5.54583333,20.4625 C5.35416667,20.6541667 5.11458333,20.75 4.875,20.75 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" />
-														<path d="M2,11.8650466 L2,6 C2,4.34314575 3.34314575,3 5,3 L19,3 C20.6568542,3 22,4.34314575 22,6 L22,15 C22,15.0032706 21.9999948,15.0065399 21.9999843,15.009808 L22.0249378,15 L22.0249378,19.5857864 C22.0249378,20.1380712 21.5772226,20.5857864 21.0249378,20.5857864 C20.7597213,20.5857864 20.5053674,20.4804296 20.317831,20.2928932 L18.0249378,18 L12.9835977,18 C12.7263047,14.0909841 9.47412135,11 5.5,11 C4.23590829,11 3.04485894,11.3127315 2,11.8650466 Z M6,7 C5.44771525,7 5,7.44771525 5,8 C5,8.55228475 5.44771525,9 6,9 L15,9 C15.5522847,9 16,8.55228475 16,8 C16,7.44771525 15.5522847,7 15,7 L6,7 Z" fill="#000000" />
-													</g>
-												</svg>
+												    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+												        <rect x="0" y="0" width="24" height="24"/>
+												        <path d="M12,22 C7.02943725,22 3,17.9705627 3,13 C3,8.02943725 7.02943725,4 12,4 C16.9705627,4 21,8.02943725 21,13 C21,17.9705627 16.9705627,22 12,22 Z" fill="#000000" opacity="0.3"/>
+												        <path d="M11.9630156,7.5 L12.0475062,7.5 C12.3043819,7.5 12.5194647,7.69464724 12.5450248,7.95024814 L13,12.5 L16.2480695,14.3560397 C16.403857,14.4450611 16.5,14.6107328 16.5,14.7901613 L16.5,15 C16.5,15.2109164 16.3290185,15.3818979 16.1181021,15.3818979 C16.0841582,15.3818979 16.0503659,15.3773725 16.0176181,15.3684413 L11.3986612,14.1087258 C11.1672824,14.0456225 11.0132986,13.8271186 11.0316926,13.5879956 L11.4644883,7.96165175 C11.4845267,7.70115317 11.7017474,7.5 11.9630156,7.5 Z" fill="#000000"/>
+												    </g>
+												</svg><!--end::Svg Icon-->
+
 												<!--end::Svg Icon-->
 											</span>
 											<h3 class="wizard-title"><span class="label label-lg mr-2">2</span>Durée du prêt</h3>
@@ -164,13 +169,13 @@ $title = 'Ajouter un prêt'; ?>
 													<div class="form-group row">
 														<label class="col-xl-3 col-lg-3 col-form-label">Référence <sup class="text-danger">*</sup></label>
 														<div class="col-lg-9 col-xl-9">
-															<input class="form-control form-control-lg form-control-solid" name="reference" type="text" value="<?= isset($currentLend['reference']) ? $currentLend['reference'] : '' ?>" />
+															<input class="form-control form-control-lg" name="reference" type="text" value="<?= isset($currentLend['reference']) ? $currentLend['reference'] : '' ?>" />
 														</div>
 													</div>
 													<div class="form-group row">
 														<label class="col-xl-3 col-lg-3 col-form-label">Loueur <sup class="text-danger">*</sup></label>
 														<div class="col-lg-9 col-xl-9">
-															<select class="form-control form-control-lg form-control-solid" id="kt_select2_1" name="client_id">
+															<select class="form-control form-control-lg" id="kt_select2_1" name="client_id">
 																<option value=""></option>
 																<?php
 																foreach ($clients as $key => $user) { ?>
@@ -188,20 +193,23 @@ $title = 'Ajouter un prêt'; ?>
 											<div class="row">
 												<div class="col-xl-12">
 													<div class="form-group row">
-														<div class="col-lg-9 col-xl-6">
+														<div class="col-lg-9 col-xl-9">
 															<h3 class="mb-10 font-weight-bold text-dark text-uppercase">Durée du prêt</h3>
 														</div>
 													</div>
 													<div class="form-group row">
-														<label class="col-xl-3 col-lg-3 col-form-label">Date du prêt <sup class="text-danger">*</sup></label>
-														<div class="col-lg-9 col-xl-9">
-															<input class="form-control form-control-lg form-control-solid" name="supplier" type="text" value="<?= isset($currentLend['supplier']) ? $currentLend['supplier'] : '' ?>" />
-														</div>
-													</div>
-													<div class="form-group row">
-														<label class="col-xl-3 col-lg-3 col-form-label">Date de restitution <sup class="text-danger">*</sup></label>
-														<div class="col-lg-9 col-xl-9">
-															<input class="form-control form-control-lg form-control-solid" name="supplier" type="text" value="<?= isset($currentLend['supplier']) ? $currentLend['supplier'] : '' ?>" />
+														<label class="col-xl-3 col-lg-3 col-form-label">Dates de début et fin <sup class="text-danger">*</sup></label>
+														<div class="col-lg-9">
+															<div class="input-daterange input-group" id="kt_datepicker_5">
+																<input class="form-control form-control-lg" name="startdate" type="text" value="<?= isset($currentLend['startdate']) ? $currentLend['startdate'] : date('d/m/Y') ?>" />
+																<div class="input-group-append">
+																	<span class="input-group-text">
+																		<i class="la la-ellipsis-h"></i>
+																	</span>
+																</div>
+																<input class="form-control form-control-lg" name="enddate" type="text" value="<?= isset($currentLend['enddate']) ? $currentLend['enddate'] : '' ?>" placeholder="Date de restitution programmée" />
+															</div>
+															<span class="form-text text-muted">Sélectionnez une date de prêt et une date de restitution</span>
 														</div>
 													</div>
 												</div>
@@ -218,9 +226,20 @@ $title = 'Ajouter un prêt'; ?>
 														</div>
 													</div>
 													<div class="form-group row">
-														<label class="col-xl-3 col-lg-3 col-form-label">Stock actuel <sup class="text-danger">*</sup></label>
+														<label class="col-xl-3 col-lg-3 col-form-label">Liste des produits et lots <sup class="text-danger">*</sup></label>
 														<div class="col-lg-9 col-xl-9">
-															<input class="form-control<?= isset($currentLend['stock']) && $user['role'] < 3 ? '-plaintext' : '' ?> form-control-lg form-control-solid" name="stock" type="text" value="<?= isset($currentLend['stock']) ? $currentLend['stock'] : '' ?>" />
+															<select id="kt_dual_listbox_2" name="products" class="dual-listbox" multiple="multiple">
+																<?php
+																foreach ($products as $product) {
+																	$selected = null !== $currentLendProducts && array_search($product->id, array_column($currentLendProducts, 'product_id')) ? 'selected' : ''; ?>
+																	<option value="<?= $product['id'] ?>"><?= $product['name'] ?></option>
+																<?php }
+
+																foreach ($productLots as $productLot) {
+																	$selected = null !== $currentLendProducts && array_search($productLot->id, array_column($currentLendProducts, 'product_lot_id')) ? 'selected' : ''; ?>
+																	<option value="<?= $productLot['id'] ?>">LOT - <?= $productLot['name'] ?></option>
+																<?php } ?>
+															</select>
 														</div>
 													</div>
 													<div class="form-group row">
@@ -229,7 +248,7 @@ $title = 'Ajouter un prêt'; ?>
 														</div>
 													</div>
 													<div class="form-group row">
-														<label class="col-xl-3 col-lg-3 col-form-label">Activer le prêt ?</label>
+														<label class="col-xl-3 col-lg-3 col-form-label"><?= isset($currentLend['status']) ? 'Statut du prêt' : 'Démarrer le prêt maintenant' ?></label>
 														<div class="col-lg-9 col-xl-9">
 															<span class="switch switch-lg switch-icon">
 																<label>

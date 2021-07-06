@@ -36,13 +36,16 @@ var KTDualListbox = function () {
             removeEvent: function (value) {
                 console.log(value);
             },
-            availableTitle: "Source Options",
-            selectedTitle: "Destination Options",
+            searchPlaceholder: 'Rechercher',
+            availableTitle: "Produits disponibles",
+            selectedTitle: "Produits ajoutés",
             addButtonText: "<i class='flaticon2-next'></i>",
             removeButtonText: "<i class='flaticon2-back'></i>",
             addAllButtonText: "<i class='flaticon2-fast-next'></i>",
             removeAllButtonText: "<i class='flaticon2-fast-back'></i>"
         });
+        dualListBox.add_all_button.setAttribute('class', 'dual-listbox__button d-none');
+        dualListBox.remove_all_button.setAttribute('class', 'dual-listbox__button d-none');
     };
 
     var demo3 = function () {
@@ -93,10 +96,10 @@ var KTDualListbox = function () {
     return {
         // public functions
         init: function () {
-            demo1();
+            //demo1();
             demo2();
-            demo3();
-            demo4();
+            //demo3();
+            //demo4();
         },
     };
 }();

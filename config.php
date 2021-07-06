@@ -4,7 +4,7 @@ setlocale(LC_ALL, 'fr_FR.utf8');
 
 $config = [
 	'db' => [
-		'name' => 'pawnlend',
+		'name' => '2021_ihm_prj_ka_ld_mt',
 		'user' => 'root',
 		'pwd' => '',
 		'host' => 'localhost',
@@ -22,7 +22,7 @@ $config = [
         'port' => '465',
         'encryption' => 'ssl',
         'from' => [
-        	'name' => '{SARII-Stock}',
+        	'name' => 'Pawlend',
         	'email' => 'noreply@sarii-stock.tech',
         ],
 		'admin' => [
