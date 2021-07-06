@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost
--- Généré le :  mar. 06 juil. 2021 à 20:02
+-- Généré le :  mar. 06 juil. 2021 à 20:21
 -- Version du serveur :  10.1.37-MariaDB
 -- Version de PHP :  7.2.13
 
@@ -55,14 +55,21 @@ INSERT INTO `category` (`id`, `name`, `type`, `created_at`) VALUES
 
 CREATE TABLE `lend` (
   `id` int(11) NOT NULL,
-  `reference` int(11) NOT NULL,
+  `reference` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `client_id` int(11) NOT NULL,
-  `startdate` int(11) NOT NULL,
-  `enddate` int(11) NOT NULL,
+  `startdate` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `enddate` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `status` int(11) NOT NULL DEFAULT '0',
   `user_id` int(11) NOT NULL,
   `created_at` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Déchargement des données de la table `lend`
+--
+
+INSERT INTO `lend` (`id`, `reference`, `client_id`, `startdate`, `enddate`, `status`, `user_id`, `created_at`) VALUES
+(0, '0', 40, '6', '31', 0, 0, 1625595606);
 
 -- --------------------------------------------------------
 
@@ -135,7 +142,7 @@ INSERT INTO `product` (`id`, `name`, `reference`, `supplier`, `category_id`, `de
 (3, 'MacBook Pro 15 pouces', 'Mac-15-123', 'Apple', 5, '', '1625587825_1563199365-32-jpg', 5, 1, 1, 1625587825),
 (4, 'PC HP fixe', 'HP-12-153', 'DELL', 4, '', '1625588008_unite-central-dell-optiplex-png', 5, 1, 1, 1625588008),
 (5, 'Souris Apple', 'APP-33-450', 'APPLE', 1, '', '1625588246_5701ecf1-7617-42e6-a297-06cbf9d8cc59-jpg', 5, 1, 1, 1625588163),
-(6, 'Ecran DELL 21 pouces', 'DEL-21-145', 'DELL', 3, '', '1625588328_216887_61941b16-c370-41ed-84f6-1c7801cd0406-jpg', 5, 1, 1, 1625588328);
+(6, 'Ecran DELL 21 pouces', 'DEL-21-145', 'DELL', 3, '', '1625588328_216887_61941b16-c370-41ed-84f6-1c7801cd0406-jpg', 9, 1, 1, 1625588328);
 
 -- --------------------------------------------------------
 
