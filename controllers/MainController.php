@@ -313,8 +313,8 @@ class MainController {
 			if (!isset($params['notifications'])) {
 				if ($params['notifications'] = $product->save($currentProduct, $operation['type'])) {
 
-					$history = new History($this->_dbConn);
-					$params['notifications2'] = $history->save($_POST['product_id'], $this->_session->get('user')['id'], $operation['type'], $operation['value']);
+					//$history = new History($this->_dbConn);
+					//$params['notifications2'] = $history->save($_POST['product_id'], $this->_session->get('user')['id'], $operation['type'], $operation['value']);
 
 				} else {
 					$params['notifications'] = [
