@@ -86203,8 +86203,25 @@ select.is-valid + span.select2 {
 
 .header-primary > .container-fluid,
 .aside-primary .aside-menu-wrapper,
-.aside-primary .aside-menu {
+.aside-primary .aside-menu,
+.header-mobile-primary .header-mobile {
 	background-color: #3699ff;
+}
+.header-mobile-primary .header-mobile .burger-icon span {
+	background-color: #fff;
+}
+.header-mobile-primary .header-mobile .burger-icon span::before, 
+.header-mobile-primary .header-mobile .burger-icon span::after {
+	background-color: #72b7ff;
+}
+.header-mobile-primary .header-mobile .burger-icon:hover span {
+	background-color: #fff;
+	opacity: 0.8;
+}
+.header-mobile-primary .header-mobile .burger-icon:hover span::before, 
+.header-mobile-primary .header-mobile .burger-icon:hover span::after {
+	background-color: #72b7ff;
+	opacity: 0.8;
 }
 .header.header-primary .header-menu .menu-nav > .menu-item > .menu-link .menu-text,
 .aside-primary .aside-menu .menu-nav > .menu-item > .menu-link .menu-icon,
@@ -86223,8 +86240,12 @@ select.is-valid + span.select2 {
 	background-color: rgba(255, 255, 255, .95);
 }
 .aside-primary .aside-menu .menu-nav > .menu-item > .menu-heading .menu-icon.svg-icon svg g [fill],
-.aside-primary .aside-menu .menu-nav > .menu-item > .menu-link .menu-icon.svg-icon svg g [fill] {
+.aside-primary .aside-menu .menu-nav > .menu-item > .menu-link .menu-icon.svg-icon svg g [fill],
+.header-mobile-primary .header-mobile .btn .svg-icon svg g [fill] {
   fill: #ffffff;
+}
+.header-mobile-primary .header-mobile .btn:hover .svg-icon svg g [fill] {
+  fill: #eeeeee;
 }
 .aside {
     z-index: 1001;
@@ -86235,5 +86256,8 @@ select.is-valid + span.select2 {
     transition: left 0.3s ease, right 0.3s ease, bottom 0.3s ease, top 0.3s ease;
     left: -295px;
     width: 275px;
+}
+.aside-primary .aside-menu .menu-nav > .menu-item .menu-submenu .menu-item.menu-item-active > .menu-link {
+    background-color: rgba(255, 255, 255, 0.8);
 }
 
