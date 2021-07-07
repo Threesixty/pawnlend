@@ -64,13 +64,6 @@ CREATE TABLE `lend` (
   `created_at` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- Déchargement des données de la table `lend`
---
-
-INSERT INTO `lend` (`id`, `reference`, `client_id`, `startdate`, `enddate`, `status`, `user_id`, `created_at`) VALUES
-(0, '0', 40, '6', '31', 0, 0, 1625595606);
-
 -- --------------------------------------------------------
 
 --
