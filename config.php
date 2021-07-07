@@ -56,6 +56,16 @@ $config = [
 			'view' => 'product',
 			'auth' => true,
 		],
+		'lots-produits' => [
+			'layout' => true,
+			'view' => 'product-lots',
+			'auth' => true,
+		],
+		'lot-produits' => [
+			'layout' => true,
+			'view' => 'product-lot',
+			'auth' => true,
+		],
 		'historiqueProduit' => [
 			'layout' => false,
 			'view' => '',
