@@ -209,6 +209,18 @@ ALTER TABLE `category`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Index pour la table `lend`
+--
+ALTER TABLE `lend`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `lend_product`
+--
+ALTER TABLE `lend_product`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Index pour la table `order`
 --
 ALTER TABLE `order`
@@ -226,6 +238,12 @@ ALTER TABLE `order_product`
 ALTER TABLE `product`
   ADD PRIMARY KEY (`id`),
   ADD KEY `idx_product_category` (`category_id`) USING BTREE;
+
+--
+-- Index pour la table `product_lot_product`
+--
+ALTER TABLE `product_lot`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Index pour la table `product_lot_product`
@@ -250,6 +268,18 @@ ALTER TABLE `category`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
+-- AUTO_INCREMENT pour la table `lend`
+--
+ALTER TABLE `lend`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `lend_product`
+--
+ALTER TABLE `lend_product`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT pour la table `order`
 --
 ALTER TABLE `order`
@@ -266,6 +296,12 @@ ALTER TABLE `order_product`
 --
 ALTER TABLE `product`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT pour la table `product_lot`
+--
+ALTER TABLE `product_lot`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT pour la table `product_lot_product`
