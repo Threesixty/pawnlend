@@ -177,6 +177,7 @@ var KTProductsAdd = function () {
 		}
 	};
 }();
+
 // Class definition
 var KTLendsAdd = function () {
 	// Base elements
@@ -324,17 +325,10 @@ var KTLendsAdd = function () {
 			_formEl,
 			{
 				fields: {
-					stock: {
+					products: {
 						validators: {
 							notEmpty: {
-								message: 'Veuillez saisir le stock actuel'
-							}
-						}
-					},
-					stock_mini: {
-						validators: {
-							notEmpty: {
-								message: 'Veuillez définir une valeur pour l‘alerte de stock minimum'
+								message: 'Veuillez saisir au moins 1 produit ou lot'
 							}
 						}
 					},
@@ -365,7 +359,157 @@ var KTLendsAdd = function () {
 	};
 }();
 
+// Class definition
+var KTProductLotsAdd = function () {
+	// Base elements
+	var _wizardEl;
+	var _formEl;
+	var _wizardObj;
+	var _validations = [];
+
+	// Private functions
+	var _initWizard = function () {
+		// Initialize form wizard
+		_wizardObj = new KTWizard(_wizardEl, {
+			startStep: 1, // initial active step number
+			clickableSteps: true  // allow step clicking
+		});
+
+		// Validation before going to next page
+		_wizardObj.on('change', function (wizard) {
+			if (wizard.getStep() > wizard.getNewStep()) {
+				return; // Skip if stepped back
+			}
+
+			if (wizard.getStep() != 4) {
+				$('.lend-reference').html($('input[name="reference"]').val());
+				$('.lend-client').html($('select[name="client_id"] option:selected').text());
+				$('.lend-start').html($('input[name="startdate"]').val());
+				$('.lend-end').html($('input[name="enddate"]').val());
+				var productList = '';
+				$('select[name="products"] option:selected').each(function() {
+					if (productList != '')
+						productList += '<br>'
+					productList += $(this).text();
+				});
+				$('.lend-products').html(productList);
+				var status = $('input[name="status"]').is(':checked') ? 'Oui' : 'Non';
+				$('.product-status').html(status);
+			}
+
+			// Validate form before change wizard step
+			var validator = _validations[wizard.getStep() - 1]; // get validator for currnt step
+
+			if (validator) {
+				validator.validate().then(function (status) {
+					if (status == 'Valid') {
+						wizard.goTo(wizard.getNewStep());
+
+						KTUtil.scrollTop();
+					} else {
+						Swal.fire({
+							text: "Attention ! Il semblerait que certains champs requis n'aient pas été renseignés.",
+							icon: "error",
+							buttonsStyling: false,
+							confirmButtonText: "C'est compris",
+							customClass: {
+								confirmButton: "btn font-weight-bold btn-light"
+							}
+						}).then(function () {
+							KTUtil.scrollTop();
+						});
+					}
+				});
+			}
+
+			return false;  // Do not change wizard step, further action will be handled by he validator
+		});
+
+		// Change event
+		_wizardObj.on('changed', function (wizard) {
+			KTUtil.scrollTop();
+		});
+
+		// Submit event
+		_wizardObj.on('submit', function (wizard) {
+			_formEl.submit();
+		});
+	}
+
+	var _initValidation = function () {
+		// Init form validation rules. For more info check the FormValidation plugin's official documentation:https://formvalidation.io/
+		// Step 1
+		_validations.push(FormValidation.formValidation(
+			_formEl,
+			{
+				fields: {
+					reference: {
+						validators: {
+							notEmpty: {
+								message: 'Une référence lot est requise'
+							}
+						}
+					},
+					name: {
+						validators: {
+							notEmpty: {
+								message: 'Un nom de lot de produits est requis'
+							}
+						}
+					},
+				},
+				plugins: {
+					trigger: new FormValidation.plugins.Trigger(),
+					// Bootstrap Framework Integration
+					bootstrap: new FormValidation.plugins.Bootstrap({
+						//eleInvalidClass: '',
+						eleValidClass: '',
+					})
+				}
+			}
+		));
+
+		// Step 2
+		_validations.push(FormValidation.formValidation(
+			_formEl,
+			{
+				fields: {
+					products: {
+						validators: {
+							notEmpty: {
+								message: 'Veuillez sélectionner au moins un produit'
+							}
+						}
+					},
+				},
+				plugins: {
+					trigger: new FormValidation.plugins.Trigger(),
+					// Bootstrap Framework Integration
+					bootstrap: new FormValidation.plugins.Bootstrap({
+						//eleInvalidClass: '',
+						eleValidClass: '',
+					})
+				}
+			}
+		));
+	}
+
+	return {
+		// public functions
+		init: function () {
+			_wizardEl = KTUtil.getById('kt_product_lot_add');
+			_formEl = KTUtil.getById('kt_product_lot_add_form');
+
+			if ($('#kt_product_lot_add').length)
+				_initWizard();
+			if ($('#kt_product_lot_add_form').length)
+				_initValidation();
+		}
+	};
+}();
+
 jQuery(document).ready(function () {
 	KTProductsAdd.init();
 	KTLendsAdd.init();
+	KTProductLotsAdd.init();
 });
