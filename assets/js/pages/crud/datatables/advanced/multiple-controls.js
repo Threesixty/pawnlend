@@ -50,6 +50,23 @@ var KTDatatablesAdvancedMultipleControls = function() {
             language: language
 		});
 
+		$('#kt_datatable_lots').DataTable({
+			// DOM Layout settings
+			dom:
+				"<'row py-3'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6'f>>" +
+				"<'row'<'col-sm-12 col-md-6'i><'col-sm-12 col-md-6'p>>" +
+				"<'row py-3'<'col-sm-12'tr>>" +
+				"<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>", // read more: https://datatables.net/examples/basic_init/dom.html
+
+			columnDefs: [
+                { "orderable": false, "targets": [6] },
+                { "searchable": false, "targets": [6] }
+			],
+            order: [[ 0, "desc" ]],
+            pageLength: 25,
+            language: language
+		});
+
 		$('#kt_datatable_lend').DataTable({
 			// DOM Layout settings
 			dom:

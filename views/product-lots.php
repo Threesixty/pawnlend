@@ -33,7 +33,7 @@ $title = 'Liste des lots de produits'; ?>
 
 						<span id="kt_quick_panel_toggle" class="d-none"></span>
 						<!--begin: Datatable-->
-						<table class="table table-separate table-head-custom table-checkable table-responsive" id="kt_datatable_product">
+						<table class="table table-separate table-head-custom table-checkable table-responsive" id="kt_datatable_lots">
 							<thead>
 								<tr>
 									<th>ID</th>
