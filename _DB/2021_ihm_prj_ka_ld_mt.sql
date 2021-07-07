@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost
--- Généré le :  mar. 06 juil. 2021 à 20:21
+-- Généré le :  mer. 07 juil. 2021 à 14:46
 -- Version du serveur :  10.1.37-MariaDB
 -- Version de PHP :  7.2.13
 
@@ -187,8 +187,8 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id`, `username`, `password`, `password_token`, `lastname`, `firstname`, `email`, `role`, `status`, `created_at`) VALUES
 (11, 'admin', 'd033e22ae348aeb5660fc2140aec35850c4da997', '', 'THOMAS', 'Michael', 'michael.convergence@gmail.com', 3, 1, 1613333912),
-(34, 'magasinier', 'c3d40736bd58d6c807f65e9b740a8bcbadb89aba', NULL, 'Osborne', 'Harry', 'info@osborne.fr', 1, 1, 1613425652),
-(39, 'prescripteur', 'ac509bec2b2162fbda370137dd554518a83b2955', NULL, 'Duponts', 'Jean', 'johndoe@yopmail.com', 2, 1, 1620746924),
+(34, 'magasinier', 'c3d40736bd58d6c807f65e9b740a8bcbadb89aba', NULL, 'Osborne', 'Harry', 'info@osborne.fr', 2, 1, 1613425652),
+(39, 'prescripteur', 'ac509bec2b2162fbda370137dd554518a83b2955', NULL, 'Duponts', 'Jean', 'johndoe@yopmail.com', 1, 1, 1620746924),
 (40, 'client', 'd2a04d71301a8915217dd5faf81d12cffd6cd958', NULL, 'Söze', 'Keyser', 'ksoze@yopmail.com', 0, 1, 1625565516);
 
 --
@@ -233,7 +233,7 @@ ALTER TABLE `product`
   ADD KEY `idx_product_category` (`category_id`) USING BTREE;
 
 --
--- Index pour la table `product_lot_product`
+-- Index pour la table `product_lot`
 --
 ALTER TABLE `product_lot`
   ADD PRIMARY KEY (`id`);
