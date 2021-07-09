@@ -7,10 +7,10 @@ class OrderProduct {
 	private $_conn;
 
 	public $id;
-	public $lendId;
-	public $product_lot_id;
+	public $order_id;
 	public $product_id;
 	public $quantity;
+	public $reception;
 
 	public function __construct($dB) {
 		$this->_conn = $dB;

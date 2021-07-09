@@ -74,9 +74,12 @@ class ProductLot {
 
     public function save($productLot) {
 
+        $this->_session = new Session();
+		$user = $this->_session->get('user');
+
     	$action = false;
     	if (isset($productLot['id'])) {
-			$sql = 'UPDATE product_lot SET name = "'.$productLot['name'].'", user_id = "'.$productLot['user_id'].'" WHERE id = '.$productLot['id'];
+			$sql = 'UPDATE product_lot SET reference = "'.$productLot['reference'].'", name = "'.$productLot['name'].'", user_id = "'.$user['user_id'].'" WHERE id = '.$productLot['id'];
     	} else {
 
     		$action = 'redirect';

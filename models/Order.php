@@ -75,11 +75,14 @@ class Order {
 
     public function save($order) {
 
+        $this->_session = new Session();
+		$user = $this->_session->get('user');
+
     	$status = isset($_POST['status']) && $_POST['status'] == 1 ? 1 : 0;
 
     	$action = false;
     	if (isset($order['id'])) {
-			$sql = 'UPDATE order SET reference = "'.$order['reference'].'", status = "'.$order['status'].'", user_id = "'.$order['stock'].'" WHERE id = '.$order['id'];
+			$sql = 'UPDATE order SET reference = "'.$order['reference'].'", status = "'.$order['status'].'", user_id = "'.$user['id'].'" WHERE id = '.$order['id'];
     	} else {
 
     		$action = 'redirect';

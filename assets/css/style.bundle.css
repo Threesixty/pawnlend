@@ -86260,4 +86260,10 @@ select.is-valid + span.select2 {
 .aside-primary .aside-menu .menu-nav > .menu-item .menu-submenu .menu-item.menu-item-active > .menu-link {
     background-color: rgba(255, 255, 255, 0.8);
 }
+.nav-primary a:hover .nav-icon {
+	color: #3699FF;
+}
+.nav-primary a.active .nav-icon {
+	color: #fff;
+}
 

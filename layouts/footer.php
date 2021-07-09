@@ -170,7 +170,7 @@
 
 			<!--begin::Header-->
 			<div class="offcanvas-header d-flex align-items-center justify-content-between pb-5">
-				<h3 class="font-weight-bold m-0">Historique des mouvements</h3>
+				<h3 class="font-weight-bold m-0">En cours...</h3>
 				<a href="#" class="btn btn-xs btn-icon btn-light btn-hover-primary" id="kt_quick_panel_close">
 					<i class="ki ki-close icon-xs text-muted"></i>
 				</a>

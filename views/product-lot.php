@@ -2,14 +2,12 @@
 require_once('components/Widget.php');
 require_once('components/Helper.php');
 
-$currentLend = isset($params['currentLend']) ? $params['currentLend'] : null;
-$currentLendProducts = isset($params['currentLendProducts']) ? $params['currentLendProducts'] : null;
+$currentLend = isset($params['currentProductLot']) ? $params['currentProductLot'] : null;
+$currentProductLotProduct = isset($params['currentProductLotProduct']) ? $params['currentProductLotProduct'] : null;
 
-$clients = isset($params['clients']) ? $params['clients'] : null;
 $products = isset($params['products']) ? $params['products'] : null;
-$productLots = isset($params['productLots']) ? $params['productLots'] : null;
 
-$title = 'Ajouter un prêt'; ?>
+$title = 'Ajouter un lot de produits'; ?>
 
 	<!--begin::Content-->
 	<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
@@ -28,7 +26,7 @@ $title = 'Ajouter un prêt'; ?>
 						</div>
 					</div>
 					<div class="card-body p-0">
-						<div class="wizard wizard-1" id="kt_lends_add" data-wizard-state="step-first" data-wizard-clickable="true">
+						<div class="wizard wizard-1" id="kt_product_lot_add" data-wizard-state="step-first" data-wizard-clickable="true">
 							<!--begin::Wizard Nav-->
 							<div class="wizard-nav border-bottom">
 								<div class="wizard-steps p-8 p-lg-10">
@@ -62,34 +60,6 @@ $title = 'Ajouter un prêt'; ?>
 									<div class="wizard-step" data-wizard-type="step">
 										<div class="wizard-label">
 											<span class="svg-icon svg-icon-4x wizard-icon">
-												<!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo1\dist/../src/media/svg/icons\Home\Clock.svg-->
-												<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-												    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-												        <rect x="0" y="0" width="24" height="24"/>
-												        <path d="M12,22 C7.02943725,22 3,17.9705627 3,13 C3,8.02943725 7.02943725,4 12,4 C16.9705627,4 21,8.02943725 21,13 C21,17.9705627 16.9705627,22 12,22 Z" fill="#000000" opacity="0.3"/>
-												        <path d="M11.9630156,7.5 L12.0475062,7.5 C12.3043819,7.5 12.5194647,7.69464724 12.5450248,7.95024814 L13,12.5 L16.2480695,14.3560397 C16.403857,14.4450611 16.5,14.6107328 16.5,14.7901613 L16.5,15 C16.5,15.2109164 16.3290185,15.3818979 16.1181021,15.3818979 C16.0841582,15.3818979 16.0503659,15.3773725 16.0176181,15.3684413 L11.3986612,14.1087258 C11.1672824,14.0456225 11.0132986,13.8271186 11.0316926,13.5879956 L11.4644883,7.96165175 C11.4845267,7.70115317 11.7017474,7.5 11.9630156,7.5 Z" fill="#000000"/>
-												    </g>
-												</svg><!--end::Svg Icon-->
-
-												<!--end::Svg Icon-->
-											</span>
-											<h3 class="wizard-title"><span class="label label-lg mr-2">2</span>Durée du prêt</h3>
-										</div>
-										<span class="svg-icon svg-icon-xl wizard-arrow">
-											<!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Arrow-right.svg-->
-											<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-												<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-													<polygon points="0 0 24 0 24 24 0 24" />
-													<rect fill="#000000" opacity="0.3" transform="translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000)" x="11" y="5" width="2" height="14" rx="1" />
-													<path d="M9.70710318,15.7071045 C9.31657888,16.0976288 8.68341391,16.0976288 8.29288961,15.7071045 C7.90236532,15.3165802 7.90236532,14.6834152 8.29288961,14.2928909 L14.2928896,8.29289093 C14.6714686,7.914312 15.281055,7.90106637 15.675721,8.26284357 L21.675721,13.7628436 C22.08284,14.136036 22.1103429,14.7686034 21.7371505,15.1757223 C21.3639581,15.5828413 20.7313908,15.6103443 20.3242718,15.2371519 L15.0300721,10.3841355 L9.70710318,15.7071045 Z" fill="#000000" fill-rule="nonzero" transform="translate(14.999999, 11.999997) scale(1, -1) rotate(90.000000) translate(-14.999999, -11.999997)" />
-												</g>
-											</svg>
-											<!--end::Svg Icon-->
-										</span>
-									</div>
-									<div class="wizard-step" data-wizard-type="step">
-										<div class="wizard-label">
-											<span class="svg-icon svg-icon-4x wizard-icon">
 												<!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo1\dist/../src/media/svg/icons\Shopping\Box3.svg-->
 												<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
 												    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -100,7 +70,7 @@ $title = 'Ajouter un prêt'; ?>
 												</svg>
 												<!--end::Svg Icon-->
 											</span>
-											<h3 class="wizard-title"><span class="label label-lg mr-2">3</span>Produits</h3>
+											<h3 class="wizard-title"><span class="label label-lg mr-2">2</span>Produits</h3>
 										</div>
 										<span class="svg-icon svg-icon-xl wizard-arrow">
 											<!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Arrow-right.svg-->
@@ -133,7 +103,7 @@ $title = 'Ajouter un prêt'; ?>
 												</svg>
 												<!--end::Svg Icon-->
 											</span>
-											<h3 class="wizard-title"><span class="label label-lg mr-2">4</span>Résumé</h3>
+											<h3 class="wizard-title"><span class="label label-lg mr-2">3</span>Résumé</h3>
 										</div>
 										<span class="svg-icon svg-icon-xl wizard-arrow last">
 											<!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Arrow-right.svg-->
@@ -154,7 +124,7 @@ $title = 'Ajouter un prêt'; ?>
 							<div class="row justify-content-center my-10 px-8 my-lg-15 px-lg-10">
 								<div class="col-xl-12 col-xxl-7">
 									<!--begin::Form Wizard-->
-									<form class="form" id="kt_lends_add_form" method="post" enctype="multipart/form-data">
+									<form class="form" id="kt_product_lot_add_form" method="post" enctype="multipart/form-data">
 										<?php
 										if (isset($_GET['id'])) { ?>
 											<input type="hidden" name="id" value="<?= $_GET['id'] ?>">
@@ -173,15 +143,9 @@ $title = 'Ajouter un prêt'; ?>
 														</div>
 													</div>
 													<div class="form-group row">
-														<label class="col-xl-3 col-lg-3 col-form-label">Loueur <sup class="text-danger">*</sup></label>
+														<label class="col-xl-3 col-lg-3 col-form-label">Nom <sup class="text-danger">*</sup></label>
 														<div class="col-lg-9 col-xl-9">
-															<select class="form-control form-control-lg" id="kt_select2_1" name="client_id">
-																<option value=""></option>
-																<?php
-																foreach ($clients as $key => $user) { ?>
-																	<option value="<?= $user['id'] ?>" <?= isset($currentLend['client_id']) && $currentLend['client_id'] == $user['id'] ? 'selected' : '' ?>><?= ucwords($user['firstname']).' '.mb_strtoupper($user['lastname']) ?></option>
-																<?php } ?>
-															</select>
+															<input class="form-control form-control-lg" name="name" type="text" value="<?= isset($currentLend['name']) ? $currentLend['name'] : '' ?>" />
 														</div>
 													</div>
 												</div>
@@ -193,51 +157,18 @@ $title = 'Ajouter un prêt'; ?>
 											<div class="row">
 												<div class="col-xl-12">
 													<div class="form-group row">
-														<div class="col-lg-9 col-xl-9">
-															<h3 class="mb-10 font-weight-bold text-dark text-uppercase">Durée du prêt</h3>
-														</div>
-													</div>
-													<div class="form-group row">
-														<label class="col-xl-3 col-lg-3 col-form-label">Dates de début et fin <sup class="text-danger">*</sup></label>
-														<div class="col-lg-9">
-															<div class="input-daterange input-group" id="kt_datepicker_5">
-																<input class="form-control form-control-lg" name="startdate" type="text" value="<?= isset($currentLend['startdate']) ? $currentLend['startdate'] : date('d/m/Y') ?>" />
-																<div class="input-group-append">
-																	<span class="input-group-text">
-																		<i class="la la-ellipsis-h"></i>
-																	</span>
-																</div>
-																<input class="form-control form-control-lg" name="enddate" type="text" value="<?= isset($currentLend['enddate']) ? $currentLend['enddate'] : '' ?>" placeholder="Date de restitution programmée" />
-															</div>
-															<span class="form-text text-muted">Sélectionnez une date de prêt et une date de restitution</span>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-										<!--end::Step 2-->
-										<!--begin::Step 3-->
-										<div class="pb-5" data-wizard-type="step-content">
-											<div class="row">
-												<div class="col-xl-12">
-													<div class="form-group row">
 														<div class="col-lg-9 col-xl-6">
 															<h3 class="mb-10 font-weight-bold text-dark text-uppercase">Produits</h3>
 														</div>
 													</div>
 													<div class="form-group row">
-														<label class="col-xl-3 col-lg-3 col-form-label">Liste des produits et lots <sup class="text-danger">*</sup></label>
+														<label class="col-xl-3 col-lg-3 col-form-label">Liste des produits du lot <sup class="text-danger">*</sup></label>
 														<div class="col-lg-9 col-xl-9">
 															<select id="kt_dual_listbox_2" name="products" class="dual-listbox" multiple="multiple">
 																<?php
 																foreach ($products as $product) {
 																	$selected = null !== $currentLendProducts && array_search($product->id, array_column($currentLendProducts, 'product_id')) ? 'selected' : ''; ?>
 																	<option value="<?= $product['id'] ?>"><?= $product['name'] ?></option>
-																<?php }
-
-																foreach ($productLots as $productLot) {
-																	$selected = null !== $currentLendProducts && array_search($productLot->id, array_column($currentLendProducts, 'product_lot_id')) ? 'selected' : ''; ?>
-																	<option value="lot-<?= $productLot['id'] ?>">LOT - <?= $productLot['name'] ?></option>
 																<?php } ?>
 															</select>
 														</div>
@@ -248,7 +179,7 @@ $title = 'Ajouter un prêt'; ?>
 														</div>
 													</div>
 													<div class="form-group row">
-														<label class="col-xl-3 col-lg-3 col-form-label"><?= isset($currentLend['status']) ? 'Statut du prêt' : 'Démarrer le prêt maintenant' ?></label>
+														<label class="col-xl-3 col-lg-3 col-form-label"><?= isset($currentLend['status']) ? 'Statut du lot' : 'Démarrer le prêt maintenant' ?></label>
 														<div class="col-lg-9 col-xl-9">
 															<span class="switch switch-lg switch-icon">
 																<label>
@@ -270,23 +201,11 @@ $title = 'Ajouter un prêt'; ?>
 											<table class="w-100">
 												<tr>
 													<td class="font-weight-bold text-muted">Référence :</td>
-													<td class="font-weight-bold text-right lend-reference"></td>
+													<td class="font-weight-bold text-right product-lot-reference"></td>
 												</tr>
 												<tr>
-													<td class="font-weight-bold text-muted">Loueur :</td>
-													<td class="font-weight-bold text-right lend-client"></td>
-												</tr>
-											</table>
-											<div class="separator separator-dashed my-5"></div>
-											<h6 class="font-weight-bold text-uppercase mb-3">Durée du prêt :</h6>
-											<table class="w-100">
-												<tr>
-													<td class="font-weight-bold text-muted">Date de prêt :</td>
-													<td class="font-weight-bold text-right lend-start"></td>
-												</tr>
-												<tr>
-													<td class="font-weight-bold text-muted">Date de restitution programmée :</td>
-													<td class="font-weight-bold text-right lend-end"></td>
+													<td class="font-weight-bold text-muted">Nom :</td>
+													<td class="font-weight-bold text-right product-lot-name"></td>
 												</tr>
 											</table>
 											<div class="separator separator-dashed my-5"></div>
@@ -294,14 +213,14 @@ $title = 'Ajouter un prêt'; ?>
 											<table class="w-100">
 												<tr>
 													<td class="font-weight-bold text-muted">Liste :</td>
-													<td class="font-weight-bold text-right lend-products"></td>
+													<td class="font-weight-bold text-right product-lot-products"></td>
 												</tr>
 											</table>
 											<h6 class="font-weight-bold text-uppercase my-3">Statut du produit :</h6>
 											<table class="w-100">
 												<tr>
 													<td class="font-weight-bold text-muted">Activé :</td>
-													<td class="font-weight-bold text-right lend-status"></td>
+													<td class="font-weight-bold text-right product-lot-status"></td>
 												</tr>
 											</table>
 										</div>

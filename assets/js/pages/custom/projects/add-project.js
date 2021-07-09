@@ -213,7 +213,7 @@ var KTLendsAdd = function () {
 				});
 				$('.lend-products').html(productList);
 				var status = $('input[name="status"]').is(':checked') ? 'Oui' : 'Non';
-				$('.product-status').html(status);
+				$('.lend-status').html(status);
 			}
 
 			// Validate form before change wizard step
@@ -382,19 +382,17 @@ var KTProductLotsAdd = function () {
 			}
 
 			if (wizard.getStep() != 4) {
-				$('.lend-reference').html($('input[name="reference"]').val());
-				$('.lend-client').html($('select[name="client_id"] option:selected').text());
-				$('.lend-start').html($('input[name="startdate"]').val());
-				$('.lend-end').html($('input[name="enddate"]').val());
+				$('.product-lot-reference').html($('input[name="reference"]').val());
+				$('.product-lot-name').html($('input[name="name"]').val());
 				var productList = '';
 				$('select[name="products"] option:selected').each(function() {
 					if (productList != '')
 						productList += '<br>'
 					productList += $(this).text();
 				});
-				$('.lend-products').html(productList);
+				$('.product-lot-products').html(productList);
 				var status = $('input[name="status"]').is(':checked') ? 'Oui' : 'Non';
-				$('.product-status').html(status);
+				$('.product-lot-status').html(status);
 			}
 
 			// Validate form before change wizard step

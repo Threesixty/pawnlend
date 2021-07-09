@@ -79,7 +79,7 @@ class Product {
 		}
 	}
 
-    public function save($product, $type = null) {
+    public function save($product) {
 
     	$updatePhoto = $cleanFilename = '';
 		if (!empty($_FILES)) {
@@ -104,20 +104,9 @@ class Product {
 		try {
 			$res = $this->_conn->query($sql);
 
-			$msg = 'Le produit a bien été sauvegardé.';
-			switch ($type) {
-				case 'inc':
-				case 'dec':
-					$msg = 'Le stock a bien été mis à jour.';
-					break;
-				
-				default:
-					break;
-			}
-
 			return $res ? [
 						'status' => 'success',
-						'msg' => $msg,
+						'msg' => 'Le produit a bien été sauvegardé.',
 						'action' => $action,
 						'id' => $action ? $this->_conn->lastInsertId() : false,
 						'photo' => $cleanFilename,

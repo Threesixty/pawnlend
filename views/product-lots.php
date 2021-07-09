@@ -2,7 +2,7 @@
 require_once('components/Widget.php');
 require_once('components/Helper.php');
 
-$productLots = isset($params['products']) ? $params['products'] : null;
+$productLots = isset($params['productLots']) ? $params['productLots'] : null;
 
 $title = 'Liste des lots de produits'; ?>
 
