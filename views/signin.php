@@ -165,11 +165,11 @@
 					<!--end::Content body-->
 					<!--begin::Content footer for mobile-->
 					<div class="d-flex d-lg-none flex-column-auto flex-column flex-sm-row justify-content-between align-items-center mt-5 p-5">
-						<div class="text-dark-50 font-weight-bold order-2 order-sm-1 my-2">© 2021 Metronic</div>
+						<div class="text-dark-50 font-weight-bold order-2 order-sm-1 my-2">© 2021 Pawnlend</div>
 						<div class="d-flex order-1 order-sm-2 my-2">
-							<a href="#" class="text-dark-75 text-hover-primary">Privacy</a>
-							<a href="#" class="text-dark-75 text-hover-primary ml-4">Legal</a>
-							<a href="#" class="text-dark-75 text-hover-primary ml-4">Contact</a>
+							<a href="#" class="text-dark-75 text-hover-primary">Kevin ABDI</a>
+							<a href="#" class="text-dark-75 text-hover-primary ml-4">Lucas DONATI</a>
+							<a href="#" class="text-dark-75 text-hover-primary ml-4">Michael THOMAS</a>
 						</div>
 					</div>
 					<!--end::Content footer for mobile-->
