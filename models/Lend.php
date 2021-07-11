@@ -86,7 +86,7 @@ class Lend {
 
     	$action = false;
     	if (isset($lend['id'])) {
-			$sql = 'UPDATE lend SET reference = "'.$lend['reference'].'", client_id = "'.$lend['client_id'].'", startdate = "'.$lend['start'].'", enddate = "'.$lend['end'].'", status = "'.$lend['status'].'", user_id = "'.$user['id'].'" WHERE id = '.$lend['id'];
+			$sql = 'UPDATE lend SET reference = "'.$lend['reference'].'", client_id = "'.$lend['client_id'].'", startdate = "'.$lend['startdate'].'", enddate = "'.$lend['enddate'].'", status = "'.$lend['status'].'", user_id = "'.$user['id'].'" WHERE id = '.$lend['id'];
 
 			$deleteLendProducts = $lendProduct->deleteLendProducts($lend['id']);
     	} else {
@@ -99,12 +99,15 @@ class Lend {
 
 	    	if ($res && isset($lend['products']) && !empty($lend['products'])) {
 	    		foreach ($lend['products'] as $productId) {
+
 	    			$currentLendProduct = [];
-	    			$currentLendProduct['lend_id'] = $res['id'];
+	    			$currentLendProduct['lend_id'] = $lend['id'];
 	    			$isLot = explode('-', $productId);
 	    			$currentLendProduct['type'] = count($isLot) > 1 ? 'lot' : 'product';
 	    			$currentLendProduct['type_id'] = count($isLot) > 1 ? $isLot[1] : $productId;
 	    			$currentLendProduct['quantity'] = 1;
+
+					$lendProduct->save($currentLendProduct);
 	    		}
 	    	}
 
@@ -115,7 +118,7 @@ class Lend {
 						'id' => $action ? $this->_conn->lastInsertId() : false,
 					] : [
 						'status' => 'error',
-						'msg' => 'Une erreur s‘est prête lors de l‘enregistrement du prêt. Veuillez contacter l‘administrateur du site',
+						'msg' => 'Une erreur s‘est produite lors de l‘enregistrement du prêt. Veuillez contacter l‘administrateur du site',
 					];
 
 		} catch(PDOException $e) {

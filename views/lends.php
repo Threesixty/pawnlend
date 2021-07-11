@@ -65,42 +65,10 @@ $title = 'Liste des prêts'; ?>
 											<td><span class="label label-lg font-weight-bold label-light-<?= $lend->status == 1 ? 'success' : 'danger' ?> label-inline"><?= $lend->status == 1 ? 'Actif' : 'Désactivé' ?></span></td>
 											<td data-order="<?= $lend->created_at ?>"><?= strftime('%e %B %Y', $lend->created_at) ?></td>
 											<td nowrap="nowrap">
-												<div class="dropdown dropdown-inline" data-toggle="tooltip" data-theme="dark" data-placement="left" title="Actions sur le stock">
-													<a href="javascript:;" class="btn btn-sm btn-clean btn-icon" data-toggle="dropdown">
-						                                <i class="fas fa-shipping-fast"></i>
+												<div class="dropdown dropdown-inline" data-toggle="tooltip" data-theme="dark" data-placement="left" title="Restituer un prêt">
+													<a href="javascript:;" class="btn btn-sm btn-clean btn-icon kt_quick_panel_toggle">
+						                                <i class="fas fa-clipboard-check"></i>
 						                            </a>
-												  	<div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
-														<ul class="nav nav-hoverable flex-column history-parent" data-id="<?= $lend->id ?>" data-url="<?= Helper::getUrl('historiqueProduit') ?>">
-
-															<?php
-															if ($user['role'] == 1 || $user['role'] == 3) { ?>
-													    		<li class="nav-item">
-													    			<a class="nav-link text-hover-primary update-modal-inc" href="javascript:void(0)" data-toggle="modal" data-target="#modalIncStock">
-													    				<i class="nav-icon fas fa-plus"></i>
-													    				<span>Approvisionner</span>
-													    			</a>
-													    		</li>
-													    	<?php }
-
-															if ($user['role'] == 2 || $user['role'] == 3) { ?>
-													    		<li class="nav-item">
-													    			<a class="nav-link text-hover-warning update-modal-dec" href="javascript:void(0)" data-toggle="modal" data-target="#modalDecStock">
-													    				<i class="nav-icon fas fa-share"></i>
-													    				<span>Expédier</span>
-													    			</a>
-													    		</li>
-													    	<?php } ?>
-												    		<li>
-												    			<hr style="margin: 0; border-color: #eee;">
-												    		</li>
-												    		<li class="nav-item">
-												    			<a class="nav-link text-hover-dark kt_quick_panel_toggle" href="javascript:void(0)">
-												    				<i class="nav-icon fas la-list"></i>
-												    				<span class="text-hover-dark">Historique</span>
-												    			</a>
-												    		</li>
-														</ul>
-												  	</div>
 												</div>
 												<a href="<?= Helper::getUrl('pret', ['id' => $lend->id]) ?>" class="btn btn-sm btn-clean btn-icon" data-toggle="tooltip" data-theme="dark" title="Éditer">
 													<i class="icon-xl la la-edit"></i>

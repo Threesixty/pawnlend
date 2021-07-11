@@ -558,8 +558,8 @@ class MainController {
 		if (isset($_GET['id'])) {
 			$params['currentLend'] = $lend->findBy('id', $_GET['id']);
 
-			$productLotProduct = new ProductLotProduct($this->_dbConn);
-			$params['currentLendProducts'] = $productLotProduct->findBy('lend_id', $_GET['id']);
+			$lendProduct = new LendProduct($this->_dbConn);
+			$params['currentLendProducts'] = $lendProduct->findBy('lend_id', $_GET['id'], false);
 
 			if (isset($_GET['status'])) {
 				$params['notifications'] = [

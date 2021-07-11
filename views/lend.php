@@ -228,16 +228,16 @@ $title = 'Ajouter un prêt'; ?>
 													<div class="form-group row">
 														<label class="col-xl-3 col-lg-3 col-form-label">Liste des produits et lots <sup class="text-danger">*</sup></label>
 														<div class="col-lg-9 col-xl-9">
-															<select id="kt_dual_listbox_2" name="products" class="dual-listbox" multiple="multiple">
+															<select id="kt_dual_listbox_2" name="products[]" class="dual-listbox" multiple="multiple">
 																<?php
 																foreach ($products as $product) {
-																	$selected = null !== $currentLendProducts && array_search($product->id, array_column($currentLendProducts, 'product_id')) ? 'selected' : ''; ?>
-																	<option value="<?= $product['id'] ?>"><?= $product['name'] ?></option>
+																	$selected = null !== $currentLendProducts && array_search($product['id'], array_column($currentLendProducts, 'type_id')) ? 'selected' : ''; ?>
+																	<option value="<?= $product['id'] ?>" <?= $selected ?>><?= $product['name'] ?></option>
 																<?php }
 
 																foreach ($productLots as $productLot) {
-																	$selected = null !== $currentLendProducts && array_search($productLot->id, array_column($currentLendProducts, 'product_lot_id')) ? 'selected' : ''; ?>
-																	<option value="lot-<?= $productLot['id'] ?>">LOT - <?= $productLot['name'] ?></option>
+																	$selected = null !== $currentLendProducts && array_search($productLot->id, array_column($currentLendProducts, 'type_id')) ? 'selected' : ''; ?>
+																	<option value="lot-<?= $productLot['id'] ?>" <?= $selected ?>>LOT - <?= $productLot['name'] ?></option>
 																<?php } ?>
 															</select>
 														</div>

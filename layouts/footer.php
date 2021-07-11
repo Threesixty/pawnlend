@@ -118,15 +118,21 @@
 					<input type="hidden" name="product_id">
 					<div class="modal-content">
 						<div class="modal-header">
-							<h5 class="modal-title text-uppercase text-primary" id="exampleModalLabel">Approvisionner</h5>
+							<h5 class="modal-title text-uppercase text-primary" id="exampleModalLabel">Restituer un prêt</h5>
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 								<i aria-hidden="true" class="ki ki-close"></i>
 							</button>
 						</div>
 						<div class="modal-body">
 							<div class="form-group">
-								<label>Quantité :</label>
-								<input type="number" class="form-control" name="inc_stock" placeholder="10">
+								<label>Produits empruntés :</label>
+								
+							</div>
+							<div class="form-group row">
+								<label class="col-form-label text-right col-lg-3 col-sm-12">Minimum Setup</label>
+								<div class="col-lg-4 col-md-9 col-sm-12">
+									<input id="kt_touchspin_1" type="text" class="form-control" value="55" name="demo0" placeholder="Select time" />
+								</div>
 							</div>
 						</div>
 						<div class="modal-footer">
@@ -170,10 +176,124 @@
 
 			<!--begin::Header-->
 			<div class="offcanvas-header d-flex align-items-center justify-content-between pb-5">
-				<h3 class="font-weight-bold m-0">En cours...</h3>
+				<h3 class="font-weight-bold m-0">Restituer un prêt</h3>
 				<a href="#" class="btn btn-xs btn-icon btn-light btn-hover-primary" id="kt_quick_panel_close">
 					<i class="ki ki-close icon-xs text-muted"></i>
 				</a>
+			</div>
+			<div class="mt-5">
+				<form class="form">
+					<!--begin::Section-->
+					<div>
+						<div class="form-group mb-0 row align-items-center">
+							<label class="col-7 col-form-label">Enable Notifications:</label>
+							<div class="col-5 d-flex justify-content-end">
+								<input class="kt_touchspin" type="text" class="form-control" value="0" placeholder="Select time" />
+							</div>
+						</div>
+						<div class="form-group mb-0 row align-items-center">
+							<label class="col-8 col-form-label">Enable Case Tracking:</label>
+							<div class="col-4 d-flex justify-content-end">
+								<span class="switch switch-success switch-sm">
+									<label>
+										<input type="checkbox" name="quick_panel_notifications_2">
+										<span></span>
+									</label>
+								</span>
+							</div>
+						</div>
+						<div class="form-group mb-0 row align-items-center">
+							<label class="col-8 col-form-label">Support Portal:</label>
+							<div class="col-4 d-flex justify-content-end">
+								<span class="switch switch-success switch-sm">
+									<label>
+										<input type="checkbox" checked="checked" name="select">
+										<span></span>
+									</label>
+								</span>
+							</div>
+						</div>
+					</div>
+					<!--end::Section-->
+					<div class="separator separator-dashed my-6"></div>
+					<!--begin::Section-->
+					<div class="pt-2">
+						<h5 class="font-weight-bold mb-3">Reports</h5>
+						<div class="form-group mb-0 row align-items-center">
+							<label class="col-8 col-form-label">Generate Reports:</label>
+							<div class="col-4 d-flex justify-content-end">
+								<span class="switch switch-sm switch-danger">
+									<label>
+										<input type="checkbox" checked="checked" name="select">
+										<span></span>
+									</label>
+								</span>
+							</div>
+						</div>
+						<div class="form-group mb-0 row align-items-center">
+							<label class="col-8 col-form-label">Enable Report Export:</label>
+							<div class="col-4 d-flex justify-content-end">
+								<span class="switch switch-sm switch-danger">
+									<label>
+										<input type="checkbox" name="select">
+										<span></span>
+									</label>
+								</span>
+							</div>
+						</div>
+						<div class="form-group mb-0 row align-items-center">
+							<label class="col-8 col-form-label">Allow Data Collection:</label>
+							<div class="col-4 d-flex justify-content-end">
+								<span class="switch switch-sm switch-danger">
+									<label>
+										<input type="checkbox" checked="checked" name="select">
+										<span></span>
+									</label>
+								</span>
+							</div>
+						</div>
+					</div>
+					<!--end::Section-->
+					<div class="separator separator-dashed my-6"></div>
+					<!--begin::Section-->
+					<div class="pt-2">
+						<h5 class="font-weight-bold mb-3">Memebers</h5>
+						<div class="form-group mb-0 row align-items-center">
+							<label class="col-8 col-form-label">Enable Member singup:</label>
+							<div class="col-4 d-flex justify-content-end">
+								<span class="switch switch-sm switch-primary">
+									<label>
+										<input type="checkbox" checked="checked" name="select">
+										<span></span>
+									</label>
+								</span>
+							</div>
+						</div>
+						<div class="form-group mb-0 row align-items-center">
+							<label class="col-8 col-form-label">Allow User Feedbacks:</label>
+							<div class="col-4 d-flex justify-content-end">
+								<span class="switch switch-sm switch-primary">
+									<label>
+										<input type="checkbox" name="select">
+										<span></span>
+									</label>
+								</span>
+							</div>
+						</div>
+						<div class="form-group mb-0 row align-items-center">
+							<label class="col-8 col-form-label">Enable Customer Portal:</label>
+							<div class="col-4 d-flex justify-content-end">
+								<span class="switch switch-sm switch-primary">
+									<label>
+										<input type="checkbox" checked="checked" name="select">
+										<span></span>
+									</label>
+								</span>
+							</div>
+						</div>
+					</div>
+					<!--end::Section-->
+				</form>
 			</div>
 			<!--end::Header-->
 			<!--begin::Content-->
@@ -231,6 +351,7 @@
 		<script src="assets/js/pages/crud/file-upload/image-input.js"></script>
 		<script src="assets/js/pages/crud/forms/widgets/bootstrap-datepicker.js"></script>
 		<script src="assets/js/pages/features/miscellaneous/dual-listbox.js"></script>
+		<script src="assets/js/pages/crud/forms/widgets/bootstrap-touchspin.js"></script>
 	</body>
 	<!--end::Body-->
 </html>

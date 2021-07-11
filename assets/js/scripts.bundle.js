@@ -212,56 +212,6 @@ var KTApp = function() {
     	$('.kt_quick_panel_toggle').on('click', function() {
 
             $('#kt_quick_panel_toggle').trigger('click');
-
-	        $.ajax({
-				url : $(this).closest('.history-parent').data('url'),
-				type: 'GET',
-				contentType: 'application/x-www-form-urlencoded;charset=utf8',
-				data : {
-					elementId: $(this).closest('.history-parent').data('id'),
-				},
-				success: function(res){
-
-					var histories = JSON.parse(res);
-
-					if (histories.length) {
-
-						$('#kt_quick_panel').find('.navi-item').each(function() {
-							if (!$(this).hasClass('d-none'))
-								$(this).remove();
-						});
-						for (var idx = 0; idx < histories.length; idx++) {
-
-							var currentHistory = histories[idx];
-
-							var style = 'primary',
-								icon = 'plus',
-								sign = '+';
-							if (currentHistory['operation'] == 'dec') {
-								style = 'warning',
-								icon = 'minus',
-								sign = '-';
-							}
-
-							var operation = currentHistory['operation'] == 'inc' ? 'Approvisionnement ' : 'Expédition ';
-							var title = '<span class="text-' + style + ' text-uppercase">' + operation + '</span><hr class="my-1">';
-							var count = 'Le ' + getDateFormat(currentHistory['created_at'] * 1000);
-							var subtitle = currentHistory['user'] != undefined ? '<small class="d-block">Par <strong>' + currentHistory['user']['firstname'] + ' ' + currentHistory['user']['lastname'] + '</strong></small>' : '<small class="d-block">Produit <strong>' + currentHistory['product']['name'] + '</strong></small>';
-
-							var clone = $('#kt_quick_panel').find('.navi-item.d-none').clone();
-							clone.find('.symbol-label span.text-center').addClass('text-' + style).html(sign + currentHistory['value']);
-							clone.find('.title').html(title);
-							clone.find('.count').html(count);
-							clone.find('.subtitle').html(subtitle);
-							clone.removeClass('d-none');
-							$('#kt_quick_panel .offcanvas-content .navi').append(clone);
-						}
-					}
-				},
-				error: function(){
-					alert('An error occured, please contact support.');
-				}
-	        });
     	});
 
     	function getDateFormat(date) {

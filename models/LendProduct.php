@@ -69,7 +69,7 @@ class LendProduct {
 
 	public function deleteLendProducts($lendId) {
 
-		$sql = 'DELETE FROM lend_product WHERE lendId = '.intval($lendId);
+		$sql = 'DELETE FROM lend_product WHERE lend_id = '.intval($lendId);
 
 		try {
 			$res = $this->_conn->query($sql);
@@ -87,7 +87,7 @@ class LendProduct {
     public function save($lendProduct) {
 
     	$action = false;
-		$sql = 'INSERT INTO lend_product (lend_id, type, type_id, quantity) VALUES ("'.$lendProduct['lend_id'].'", "'.$lendProduct['type'].'", "'.$lendProduct['type_id'].'", "'.$lendProduct['quantity'].'", "'.time().'")';
+		$sql = 'INSERT INTO lend_product (lend_id, type, type_id, quantity) VALUES ("'.$lendProduct['lend_id'].'", "'.$lendProduct['type'].'", "'.$lendProduct['type_id'].'", "'.$lendProduct['quantity'].'")';
 
 		try {
 			$res = $this->_conn->query($sql);

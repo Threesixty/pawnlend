@@ -19,7 +19,7 @@ class Helper {
 	public static $_bonjour = ['Bonjour', 'Assalam Aleykom', 'Buongiorno', 'Hola', 'Nĭ hăo', 'Bom dia', 'Hi', 'Chào'];
 	public static $_roleNames = [
 			0 => [
-				'name' => 'Loueur',
+				'name' => 'Locataire',
 				'color' => 'danger'
 			],
 			1 => [
