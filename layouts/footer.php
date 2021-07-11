@@ -185,113 +185,36 @@
 				<form class="form">
 					<!--begin::Section-->
 					<div>
-						<div class="form-group mb-0 row align-items-center">
-							<label class="col-7 col-form-label">Enable Notifications:</label>
+						<div class="form-group mb-3 row align-items-center">
+							<label class="col-7 col-form-label">Ecran DELL 21 pouces</label>
 							<div class="col-5 d-flex justify-content-end">
-								<input class="kt_touchspin" type="text" class="form-control" value="0" placeholder="Select time" />
+								<input class="kt_touchspin" type="text" class="form-control" value="2" />
 							</div>
 						</div>
-						<div class="form-group mb-0 row align-items-center">
-							<label class="col-8 col-form-label">Enable Case Tracking:</label>
-							<div class="col-4 d-flex justify-content-end">
-								<span class="switch switch-success switch-sm">
-									<label>
-										<input type="checkbox" name="quick_panel_notifications_2">
-										<span></span>
-									</label>
-								</span>
+						<div class="form-group mb-3 row align-items-center">
+							<label class="col-7 col-form-label">PC HP fixe</label>
+							<div class="col-5 d-flex justify-content-end">
+								<input class="kt_touchspin" type="text" class="form-control" value="1" />
 							</div>
 						</div>
-						<div class="form-group mb-0 row align-items-center">
-							<label class="col-8 col-form-label">Support Portal:</label>
-							<div class="col-4 d-flex justify-content-end">
-								<span class="switch switch-success switch-sm">
-									<label>
-										<input type="checkbox" checked="checked" name="select">
-										<span></span>
-									</label>
-								</span>
+						<div class="form-group mb-3 row align-items-center">
+							<label class="col-7 col-form-label">Souris HP</label>
+							<div class="col-5 d-flex justify-content-end">
+								<input class="kt_touchspin" type="text" class="form-control" value="1" />
 							</div>
 						</div>
-					</div>
-					<!--end::Section-->
-					<div class="separator separator-dashed my-6"></div>
-					<!--begin::Section-->
-					<div class="pt-2">
-						<h5 class="font-weight-bold mb-3">Reports</h5>
-						<div class="form-group mb-0 row align-items-center">
-							<label class="col-8 col-form-label">Generate Reports:</label>
-							<div class="col-4 d-flex justify-content-end">
-								<span class="switch switch-sm switch-danger">
-									<label>
-										<input type="checkbox" checked="checked" name="select">
-										<span></span>
-									</label>
-								</span>
+						<div class="form-group mb-3 row align-items-center">
+							<label class="col-7 col-form-label">Clavier Logitech sans fil G613</label>
+							<div class="col-5 d-flex justify-content-end">
+								<input class="kt_touchspin" type="text" class="form-control" value="2" />
 							</div>
 						</div>
-						<div class="form-group mb-0 row align-items-center">
-							<label class="col-8 col-form-label">Enable Report Export:</label>
-							<div class="col-4 d-flex justify-content-end">
-								<span class="switch switch-sm switch-danger">
-									<label>
-										<input type="checkbox" name="select">
-										<span></span>
-									</label>
-								</span>
-							</div>
-						</div>
-						<div class="form-group mb-0 row align-items-center">
-							<label class="col-8 col-form-label">Allow Data Collection:</label>
-							<div class="col-4 d-flex justify-content-end">
-								<span class="switch switch-sm switch-danger">
-									<label>
-										<input type="checkbox" checked="checked" name="select">
-										<span></span>
-									</label>
-								</span>
-							</div>
+						<div class="form-group mt-5 text-right">
+							<button type="button" class="btn btn-lg btn-light-primary font-weight-bold mt-5" data-dismiss="modal">Annuler</button>
+							<button type="submit" class="btn btn-lg btn-primary font-weight-bold ml-3 mt-5">Valider</button>
 						</div>
 					</div>
 					<!--end::Section-->
-					<div class="separator separator-dashed my-6"></div>
-					<!--begin::Section-->
-					<div class="pt-2">
-						<h5 class="font-weight-bold mb-3">Memebers</h5>
-						<div class="form-group mb-0 row align-items-center">
-							<label class="col-8 col-form-label">Enable Member singup:</label>
-							<div class="col-4 d-flex justify-content-end">
-								<span class="switch switch-sm switch-primary">
-									<label>
-										<input type="checkbox" checked="checked" name="select">
-										<span></span>
-									</label>
-								</span>
-							</div>
-						</div>
-						<div class="form-group mb-0 row align-items-center">
-							<label class="col-8 col-form-label">Allow User Feedbacks:</label>
-							<div class="col-4 d-flex justify-content-end">
-								<span class="switch switch-sm switch-primary">
-									<label>
-										<input type="checkbox" name="select">
-										<span></span>
-									</label>
-								</span>
-							</div>
-						</div>
-						<div class="form-group mb-0 row align-items-center">
-							<label class="col-8 col-form-label">Enable Customer Portal:</label>
-							<div class="col-4 d-flex justify-content-end">
-								<span class="switch switch-sm switch-primary">
-									<label>
-										<input type="checkbox" checked="checked" name="select">
-										<span></span>
-									</label>
-								</span>
-							</div>
-						</div>
-					</div>
 					<!--end::Section-->
 				</form>
 			</div>
